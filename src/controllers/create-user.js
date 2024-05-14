@@ -19,7 +19,7 @@ export class CreateUserController {
                     return badRequest({ message: `Missing param: ${field}` });
                 }
             }
-            console.log(params.password.length);
+
             const passwordIsValid = params.password.length > 6;
             if (!passwordIsValid) {
                 return badRequest({
