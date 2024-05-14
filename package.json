@@ -4,7 +4,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "node index.js",
         "postinstall": "npx husky install",
         "migrations": "node src/db/postgres/migrations/exec.js"
     },
