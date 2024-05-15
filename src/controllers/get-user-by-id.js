@@ -7,7 +7,7 @@ export class GetUserByIdController {
         try {
             const isIdValid = validator.isUUID(request.params.userId);
             if (!isIdValid) {
-                return badRequest({ message: "The provided is not valid." });
+                return badRequest({ message: "The provided id is not valid." });
             }
 
             const getUserByIdUseCase = new GetUserByIdUseCase();
