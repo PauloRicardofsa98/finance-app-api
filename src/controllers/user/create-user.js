@@ -6,8 +6,8 @@ import {
     badRequest,
     created,
     serverError,
-} from "./helpers/index.js";
-import { EmailAlreadyInUseError } from "../errors/user.js";
+} from "../helpers/index.js";
+import { EmailAlreadyInUseError } from "../../errors/user.js";
 
 export class CreateUserController {
     constructor(createUserCase) {
