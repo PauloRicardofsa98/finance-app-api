@@ -14,7 +14,7 @@ export const checkIfAmountIsValid = (amount) => {
 };
 
 export const checkIfTypeIsValid = (type) => {
-    return ["EARNING", "EXPENSE", "INVESTIMENT"].includes(type);
+    return ["EARNING", "EXPENSE", "INVESTMENT"].includes(type);
 };
 
 export const invalidAmountResponse = () => {
@@ -25,7 +25,7 @@ export const invalidAmountResponse = () => {
 
 export const invalidTypeResponse = () => {
     return badRequest({
-        message: "The type must be EARNING, EXPENSE, INVESTIMENT.",
+        message: "The type must be EARNING, EXPENSE, INVESTMENT.",
     });
 };
 
