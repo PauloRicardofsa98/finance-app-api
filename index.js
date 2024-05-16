@@ -5,6 +5,7 @@ import express from "express";
 import {
     makeCreateUserController,
     makeDeleteUserController,
+    makeGetUserBalanceController,
     makeGetUserByIdController,
     makeUpdateUserController,
 } from "./src/factores/controllers/user.js";
@@ -22,6 +23,13 @@ app.get("/api/users/:userId", async (req, res) => {
     const getUserByIdController = makeGetUserByIdController();
 
     const { body, statusCode } = await getUserByIdController.execute(req);
+
+    res.status(statusCode).json(body);
+});
+app.get("/api/users/:userId/balance", async (req, res) => {
+    const getUserBalanceController = makeGetUserBalanceController();
+
+    const { body, statusCode } = await getUserBalanceController.execute(req);
 
     res.status(statusCode).json(body);
 });
