@@ -7,7 +7,10 @@ import {
     makeGetUserByIdController,
     makeUpdateUserController,
 } from "./src/factores/controllers/user.js";
-import { makeCreateTransactionController } from "./src/factores/controllers/transaction.js";
+import {
+    makeCreateTransactionController,
+    makeGetTransactionByUserIdController,
+} from "./src/factores/controllers/transaction.js";
 
 const app = express();
 app.use(express.json());
@@ -40,6 +43,13 @@ app.delete("/api/users/:userId", async (req, res) => {
     res.status(statusCode).json(body);
 });
 
+app.get("/api/transacrions", async (req, res) => {
+    const getTransactionByUserIdController =
+        makeGetTransactionByUserIdController();
+    const { statusCode, body } =
+        await getTransactionByUserIdController.execute(req);
+    res.status(statusCode).json(body);
+});
 app.post("/api/transacrions", async (req, res) => {
     const createTransacrionController = makeCreateTransactionController();
     const { statusCode, body } = await createTransacrionController.execute(req);
