@@ -1,14 +1,14 @@
-import { UserNotFoundError } from "../../errors/user";
-import { badRequest, ok, serverError } from "../helpers/http";
+import { UserNotFoundError } from "../../errors/user.js";
+import { badRequest, ok, serverError } from "../helpers/http.js";
 import {
     checkIfAmountIsValid,
     checkIfTypeIsValid,
     invalidAmountResponse,
     invalidTypeResponse,
-} from "../helpers/transaction";
-import { checkIfIdIsValid, invalidIdResponse } from "../helpers/validation";
+} from "../helpers/transaction.js";
+import { checkIfIdIsValid, invalidIdResponse } from "../helpers/validation.js";
 
-export class UpdateTransacrtionController {
+export class UpdateTransactionController {
     constructor(updateTransactionUseCase) {
         this.updateTransactionUseCase = updateTransactionUseCase;
     }

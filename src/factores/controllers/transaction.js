@@ -2,14 +2,17 @@ import {
     PostgresCreateTransactionRepository,
     PostgresGetTransactionsByUserIdRepository,
     PostgresGetUserByIdRepository,
+    PostgressUpdateTransactionRepository,
 } from "../../repositories/postgres/index.js";
 import {
     GetTransactionsByUserIdUseCase,
     CreateTransactionUseCase,
+    UpdateTransactionUseCase,
 } from "../../use-cases/index.js";
 import {
     GetTransactionsByUserIdController,
     CreateTransactionController,
+    UpdateTransactionController,
 } from "../../controllers/index.js";
 
 export const makeGetTransactionByUserIdController = () => {
@@ -43,4 +46,18 @@ export const makeCreateTransactionController = () => {
     );
 
     return createTransactionController;
+};
+export const makeUpdateTransactionController = () => {
+    const updateTransactionRepository =
+        new PostgressUpdateTransactionRepository();
+
+    const updateTransactionUseCase = new UpdateTransactionUseCase(
+        updateTransactionRepository,
+    );
+
+    const updateTransactionController = new UpdateTransactionController(
+        updateTransactionUseCase,
+    );
+
+    return updateTransactionController;
 };

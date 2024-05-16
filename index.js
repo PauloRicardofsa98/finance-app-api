@@ -11,6 +11,7 @@ import {
 import {
     makeCreateTransactionController,
     makeGetTransactionByUserIdController,
+    makeUpdateTransactionController,
 } from "./src/factores/controllers/transaction.js";
 
 const app = express();
@@ -44,16 +45,21 @@ app.delete("/api/users/:userId", async (req, res) => {
     res.status(statusCode).json(body);
 });
 
-app.get("/api/transacrions", async (req, res) => {
+app.get("/api/transactions", async (req, res) => {
     const getTransactionByUserIdController =
         makeGetTransactionByUserIdController();
     const { statusCode, body } =
         await getTransactionByUserIdController.execute(req);
     res.status(statusCode).json(body);
 });
-app.post("/api/transacrions", async (req, res) => {
+app.post("/api/transactions", async (req, res) => {
     const createTransacrionController = makeCreateTransactionController();
     const { statusCode, body } = await createTransacrionController.execute(req);
+    res.status(statusCode).json(body);
+});
+app.patch("/api/transactions/:transactionId", async (req, res) => {
+    const updateTransacrionController = makeUpdateTransactionController();
+    const { statusCode, body } = await updateTransacrionController.execute(req);
     res.status(statusCode).json(body);
 });
 
