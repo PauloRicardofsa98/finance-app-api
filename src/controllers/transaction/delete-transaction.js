@@ -3,7 +3,7 @@ import {
     invalidIdResponse,
     ok,
     serverError,
-    userNotFoundResponse,
+    transactionNotFoundResponse,
 } from "../helpers/index.js";
 
 export class DeleteTransactionController {
@@ -13,7 +13,7 @@ export class DeleteTransactionController {
 
     async execute(request) {
         try {
-            const transactionId = request.params.userId;
+            const transactionId = request.params.transactionId;
 
             const isIdValid = checkIfIdIsValid(transactionId);
             if (!isIdValid) {
@@ -24,7 +24,7 @@ export class DeleteTransactionController {
                 await this.deleteTransactionUseCase.execute(transactionId);
 
             if (!deletedTransaction) {
-                return userNotFoundResponse();
+                return transactionNotFoundResponse();
             }
 
             return ok(deletedTransaction);
