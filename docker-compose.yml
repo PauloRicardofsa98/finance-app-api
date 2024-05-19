@@ -3,10 +3,10 @@ services:
         image: postgres
         container_name: finance-app-postgres
         environment:
-            - POSTGRES_PASSWORD=finance-app@2024
+            - POSTGRES_PASSWORD=finance_app_2024
             - POSTGRES_USER=postgres
             - POSTGRES_DB=financeapp
         ports:
-            - "5431:5432"
+            - "5432:5432"
         volumes:
             - ./.postgres-data:/var/lib/postgresql/data
