@@ -1,19 +1,8 @@
 import { UserNotFoundError } from "../../errors/user.js";
-import {
-    badRequest,
-    serverError,
-    checkIfIdIsValid,
-    invalidIdResponse,
-    created,
-    validateRequiredFields,
-    requiredFieldsIsMissingResponse,
-} from "../helpers/index.js";
-import {
-    checkIfAmountIsValid,
-    checkIfTypeIsValid,
-    invalidAmountResponse,
-    invalidTypeResponse,
-} from "../helpers/transaction.js";
+import { createTransactionSchema } from "../../schemas/transaction.js";
+import { badRequest, serverError, created } from "../helpers/index.js";
+
+import { ZodError } from "zod";
 
 export class CreateTransactionController {
     constructor(createTransactionUseCase) {
@@ -24,47 +13,16 @@ export class CreateTransactionController {
         try {
             const params = request.body;
 
-            const requiredFields = [
-                "user_id",
-                "name",
-                "date",
-                "amount",
-                "type",
-            ];
+            await createTransactionSchema.parseAsync(params);
 
-            const { ok, missingField } = validateRequiredFields(
-                params,
-                requiredFields,
-            );
-            if (!ok) {
-                return requiredFieldsIsMissingResponse(missingField);
-            }
-
-            const userIdIsValid = checkIfIdIsValid(params.user_id);
-            if (!userIdIsValid) {
-                return invalidIdResponse();
-            }
-
-            const amountIsValid = checkIfAmountIsValid(params.amount);
-
-            if (!amountIsValid) {
-                return invalidAmountResponse();
-            }
-
-            const type = params.type.trim().toUpperCase();
-            const typeIsValid = checkIfTypeIsValid(type);
-
-            if (!typeIsValid) {
-                return invalidTypeResponse();
-            }
-
-            const transaction = await this.createTransactionUseCase.execute({
-                ...params,
-                type,
-            });
+            const transaction =
+                await this.createTransactionUseCase.execute(params);
 
             return created(transaction);
         } catch (error) {
+            if (error instanceof ZodError) {
+                return badRequest({ message: error.errors[0].message });
+            }
             if (error instanceof UserNotFoundError) {
                 return badRequest({ message: error.message });
             }
