@@ -5,8 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "node --watch index.js",
-        "postinstall": "npx husky install",
-        "migrations": "node src/db/postgres/migrations/exec.js"
+        "postinstall": "npx husky install"
     },
     "keywords": [],
     "author": "",
