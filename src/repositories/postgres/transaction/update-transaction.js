@@ -1,29 +1,10 @@
-import { PostgresHelper } from "../../../db/postgres/helper.js";
-
-export class PostgressUpdateTransactionRepository {
-    async execute(transactionId, updateTrasactionsParams) {
-        const updateFields = [];
-        const updateValues = [];
-
-        Object.keys(updateTrasactionsParams).forEach((key) => {
-            updateFields.push(`${key} = $${updateValues.length + 1}`);
-            updateValues.push(updateTrasactionsParams[key]);
+import { prisma } from "../../../../prisma/prisma.js";
+export class PostgresUpdateTransactionRepository {
+    async execute(transactionId, updateTransactionsParams) {
+        const transaction = await prisma.transaction.update({
+            where: { id: transactionId, data: updateTransactionsParams },
         });
 
-        updateValues.push(transactionId);
-
-        const updateQuery = `
-            UPDATE transactions 
-            SET ${updateFields.join(", ")} 
-            WHERE id = $${updateValues.length} 
-            RETURNING *
-        `;
-
-        const updatedTransaction = await PostgresHelper.query(
-            updateQuery,
-            updateValues,
-        );
-
-        return updatedTransaction[0];
+        return transaction;
     }
 }
