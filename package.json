@@ -4,7 +4,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "jest --watch",
+        "test": "jest --watch --passWithNoTests",
         "dev": "node --watch index.js",
         "postinstall": "npx husky install"
     },
@@ -13,7 +13,10 @@
     "license": "ISC",
     "description": "",
     "devDependencies": {
+        "@babel/core": "^7.25.2",
+        "@babel/preset-env": "^7.25.4",
         "@eslint/js": "^9.2.0",
+        "babel-jest": "^29.7.0",
         "eslint": "^9.2.0",
         "eslint-config-prettier": "^9.1.0",
         "git-commit-msg-linter": "^5.0.7",
