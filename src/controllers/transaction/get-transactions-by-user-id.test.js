@@ -89,4 +89,22 @@ describe("Get Transactions By User Id Controller", () => {
         //assert
         expect(response.statusCode).toBe(404);
     });
+
+    it("should return 500 when any error happens", async () => {
+        //arrange
+        const { sut, getUserByIdUseCase } = makeSut();
+        jest.spyOn(getUserByIdUseCase, "execute").mockRejectedValueOnce(
+            new Error()
+        );
+
+        //act
+        const response = await sut.execute({
+            query: {
+                userId: faker.string.uuid(),
+            },
+        });
+
+        //assert
+        expect(response.statusCode).toBe(500);
+    });
 });
