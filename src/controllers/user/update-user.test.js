@@ -39,4 +39,23 @@ describe("Update User Controller", () => {
         // assert
         expect(response.statusCode).toBe(200);
     });
+
+    it('should return 400 when "password" is less than 6 characters', async () => {
+        //arrange
+        const { sut } = makeSut();
+
+        //act
+        const response = await sut.execute({
+            params: httpRequest.params,
+            body: {
+                ...httpRequest.body,
+                password: faker.internet.password({
+                    length: 5,
+                }),
+            },
+        });
+
+        //assert
+        expect(response.statusCode).toBe(400);
+    });
 });
