@@ -20,7 +20,7 @@ export class GetUserBalanceController {
             }
 
             const balance = await this.getUserBalanceUseCase.execute(
-                request.params,
+                request.params.userId
             );
 
             return ok(balance);
