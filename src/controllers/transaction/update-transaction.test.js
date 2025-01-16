@@ -46,4 +46,35 @@ describe("Update Transaction Controller", () => {
         //assert
         expect(response.statusCode).toBe(200);
     });
+
+    it("should return 400 when transactionId is not valid", async () => {
+        //arrange
+        const { sut } = makeSut();
+
+        //act
+        const response = await sut.execute({
+            params: { transactionId: "invalid_id" },
+            body: httpRequest.body,
+        });
+
+        //assert
+        expect(response.statusCode).toBe(400);
+    });
+
+    it("should return 400 when when unhallowed fields are provided", async () => {
+        //arrange
+        const { sut } = makeSut();
+
+        //act
+        const response = await sut.execute({
+            params: httpRequest.params,
+            body: {
+                ...httpRequest.body,
+                invalidField: faker.lorem.word(),
+            },
+        });
+
+        //assert
+        expect(response.statusCode).toBe(400);
+    });
 });
