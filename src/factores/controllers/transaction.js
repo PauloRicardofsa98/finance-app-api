@@ -18,6 +18,8 @@ import {
     DeleteTransactionController,
 } from "../../controllers/index.js";
 
+import { IdGeneratorAdapter } from "../../adapters/index.js";
+
 export const makeGetTransactionByUserIdController = () => {
     const getTransactionsByUserId =
         new PostgresGetTransactionsByUserIdRepository();
@@ -25,7 +27,7 @@ export const makeGetTransactionByUserIdController = () => {
 
     const getTransactionsByUserIdUseCase = new GetTransactionsByUserIdUseCase(
         getTransactionsByUserId,
-        getUserByIdRepository,
+        getUserByIdRepository
     );
 
     const getTransactionsByUserIdController =
@@ -38,14 +40,16 @@ export const makeCreateTransactionController = () => {
     const createTransactionRepository =
         new PostgresCreateTransactionRepository();
     const getUserByIdRepository = new PostgresGetUserByIdRepository();
+    const idGeneratorAdapter = new IdGeneratorAdapter();
 
     const createTransactionUseCase = new CreateTransactionUseCase(
         createTransactionRepository,
         getUserByIdRepository,
+        idGeneratorAdapter
     );
 
     const createTransactionController = new CreateTransactionController(
-        createTransactionUseCase,
+        createTransactionUseCase
     );
 
     return createTransactionController;
@@ -55,11 +59,11 @@ export const makeUpdateTransactionController = () => {
         new PostgresUpdateTransactionRepository();
 
     const updateTransactionUseCase = new UpdateTransactionUseCase(
-        updateTransactionRepository,
+        updateTransactionRepository
     );
 
     const updateTransactionController = new UpdateTransactionController(
-        updateTransactionUseCase,
+        updateTransactionUseCase
     );
 
     return updateTransactionController;
@@ -69,11 +73,11 @@ export const makeDeleteTransactionController = () => {
         new PostgresDeleteTransactionRepository();
 
     const deleteTransactionUseCase = new DeleteTransactionUseCase(
-        deleteTransactionRepository,
+        deleteTransactionRepository
     );
 
     const deleteTransactionController = new DeleteTransactionController(
-        deleteTransactionUseCase,
+        deleteTransactionUseCase
     );
 
     return deleteTransactionController;
