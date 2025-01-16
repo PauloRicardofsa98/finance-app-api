@@ -12,7 +12,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
 
         const httpRequest = {
@@ -39,7 +39,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
 
         const httpRequest = {
@@ -63,7 +63,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
         const httpRequest = {
             body: {
@@ -86,7 +86,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
         const httpRequest = {
             body: {
@@ -109,7 +109,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
         const httpRequest = {
             body: {
@@ -133,7 +133,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
         const httpRequest = {
             body: {
@@ -156,7 +156,7 @@ describe("Create user Controller", () => {
         //arrange
         const createUserUseCase = new CreateUserUseCaseStub();
         const createUserController = new CreateUserController(
-            createUserUseCase,
+            createUserUseCase
         );
         const httpRequest = {
             body: {
@@ -174,5 +174,30 @@ describe("Create user Controller", () => {
 
         //assert
         expect(result.statusCode).toBe(400);
+    });
+
+    it("should return 500 if CreateUserUseCase throws an exception", async () => {
+        const createUserUseCase = new CreateUserUseCaseStub();
+        const createUserController = new CreateUserController(
+            createUserUseCase
+        );
+        const httpRequest = {
+            body: {
+                first_name: faker.person.firstName(),
+                last_name: faker.person.lastName(),
+                email: faker.internet.email(),
+                password: faker.internet.password({
+                    length: 8,
+                }),
+            },
+        };
+
+        jest.spyOn(createUserUseCase, "execute").mockImplementationOnce(() => {
+            throw new Error("Error");
+        });
+
+        const result = await createUserController.execute(httpRequest);
+
+        expect(result.statusCode).toBe(500);
     });
 });
