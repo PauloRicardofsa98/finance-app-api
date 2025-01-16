@@ -133,4 +133,19 @@ describe("Update User Controller", () => {
 
         expect(result.statusCode).toBe(500);
     });
+
+    it("should call CreateUserUseCase with correct values", async () => {
+        //arrange
+        const { sut, updateUserUseCase } = makeSut();
+        const spy = jest.spyOn(updateUserUseCase, "execute");
+
+        //act
+        await sut.execute(httpRequest);
+
+        //assert
+        expect(spy).toHaveBeenCalledWith(
+            httpRequest.params.userId,
+            httpRequest.body
+        );
+    });
 });
