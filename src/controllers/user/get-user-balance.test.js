@@ -52,10 +52,8 @@ describe("Get User Balance Controller", () => {
     it("should return 404 when user not found", async () => {
         // arrange
         const { sut, getUserBalanceUseCaseStup } = makeSut();
-        jest.spyOn(getUserBalanceUseCaseStup, "execute").mockImplementation(
-            () => {
-                throw new UserNotFoundError(httpRequest.params.userId);
-            }
+        jest.spyOn(getUserBalanceUseCaseStup, "execute").mockRejectedValueOnce(
+            new UserNotFoundError(httpRequest.params.userId)
         );
 
         // act
@@ -69,9 +67,7 @@ describe("Get User Balance Controller", () => {
         // arrange
         const { sut, getUserBalanceUseCaseStup } = makeSut();
         jest.spyOn(getUserBalanceUseCaseStup, "execute").mockRejectedValueOnce(
-            () => {
-                throw new Error("Error");
-            }
+            new Error("Error")
         );
 
         // act
