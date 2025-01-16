@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "test": "jest --watch --passWithNoTests --silent",
+        "test:coverage": "jest --passWithNoTests --coverage --silent",
         "dev": "node --watch index.js"
     },
     "keywords": [],
