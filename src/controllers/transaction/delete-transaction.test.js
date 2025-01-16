@@ -54,18 +54,15 @@ describe("Delete Transaction Controller", () => {
         expect(result.statusCode).toBe(400);
     });
 
-    it("should return 400 when transaction id is invalid", async () => {
+    it("should return 404 when transaction not found", async () => {
         //arrange
-        const { sut } = makeSut();
+        const { sut, deleteTransactionUseCase } = makeSut();
+        jest.spyOn(deleteTransactionUseCase, "execute").mockResolvedValue(null);
 
         //act
-        const result = await sut.execute({
-            params: {
-                transactionId: "invalid_id",
-            },
-        });
+        const response = await sut.execute(httpRequest);
 
         //assert
-        expect(result.statusCode).toBe(400);
+        expect(response.statusCode).toBe(404);
     });
 });
