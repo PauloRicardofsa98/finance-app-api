@@ -38,10 +38,11 @@ export const createTransactionSchema = z.object({
                 digits_after_decimal: [2],
                 allow_decimal: true,
                 decimal_separator: ".",
-            }),
+            })
         ),
 });
 
 export const updateTransactionSchema = createTransactionSchema
+    .omit({ user_id: true })
     .partial()
     .strict({ message: "Some provided field is not allowed!" });
