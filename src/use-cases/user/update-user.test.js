@@ -60,4 +60,18 @@ describe("UpdateUser UseCase", () => {
         expect(response).toBeTruthy();
         expect(response).toEqual(user);
     });
+
+    it("should successfully update a user (with email)", async () => {
+        // Arrange
+        const { sut } = makeSut();
+
+        // Act
+        const response = await sut.execute(faker.string.uuid(), {
+            email: faker.internet.email(),
+        });
+
+        // Assert
+        expect(response).toBeTruthy();
+        expect(response).toEqual(user);
+    });
 });
