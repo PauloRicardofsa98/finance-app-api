@@ -37,4 +37,20 @@ describe("GetUserById UseCase", () => {
         expect(response).toBeTruthy();
         expect(response).toEqual(user);
     });
+
+    it("should call GetUserByIdRepository with correct values", async () => {
+        // Arrange
+        const { sut, getUserByIdRepository } = makeSut();
+        const getUserByIdRepositorySpy = jest.spyOn(
+            getUserByIdRepository,
+            "execute"
+        );
+        const uuid = faker.string.uuid();
+
+        // Act
+        await sut.execute(uuid);
+
+        // Assert
+        expect(getUserByIdRepositorySpy).toHaveBeenCalledWith(uuid);
+    });
 });
