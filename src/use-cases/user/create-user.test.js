@@ -16,7 +16,7 @@ describe("Create User Use Case", () => {
     }
 
     class PasswordHasherAdapterStub {
-        execute() {
+        async execute() {
             return "hashed_password";
         }
     }
