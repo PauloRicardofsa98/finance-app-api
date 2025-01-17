@@ -1,3 +1,4 @@
+import { EmailAlreadyInUseError } from "../../errors/user";
 import { CreateUserUseCase } from "./create-user";
 import { faker } from "@faker-js/faker";
 
@@ -27,23 +28,30 @@ describe("Create User Use Case", () => {
     }
 
     const makeSut = () => {
-        const getUserByEmailRepositoryStub = new GetUserByEmailRepositoryStub();
-        const createUserRepositoryStub = new CreateUserRepositoryStub();
-        const passwordHasherAdapterStub = new PasswordHasherAdapterStub();
-        const idGeneratorAdapterStub = new IdGeneratorAdapterStub();
+        const getUserByEmailRepository = new GetUserByEmailRepositoryStub();
+        const createUserRepository = new CreateUserRepositoryStub();
+        const passwordHasherAdapter = new PasswordHasherAdapterStub();
+        const idGeneratorAdapter = new IdGeneratorAdapterStub();
         const sut = new CreateUserUseCase(
-            getUserByEmailRepositoryStub,
-            createUserRepositoryStub,
-            passwordHasherAdapterStub,
-            idGeneratorAdapterStub
+            getUserByEmailRepository,
+            createUserRepository,
+            passwordHasherAdapter,
+            idGeneratorAdapter
         );
         return {
             sut,
-            getUserByEmailRepositoryStub,
-            createUserRepositoryStub,
-            passwordHasherAdapterStub,
-            idGeneratorAdapterStub,
+            getUserByEmailRepository,
+            createUserRepository,
+            passwordHasherAdapter,
+            idGeneratorAdapter,
         };
+    };
+
+    const user = {
+        first_name: faker.person.firstName(),
+        last_name: faker.person.lastName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
     };
 
     it("should successfully create a user", async () => {
@@ -51,14 +59,25 @@ describe("Create User Use Case", () => {
         const { sut } = makeSut();
 
         // Act
-        const response = await sut.execute({
-            first_name: faker.person.firstName(),
-            last_name: faker.person.lastName(),
-            email: faker.internet.email(),
-            password: faker.internet.password(),
-        });
+        const response = await sut.execute(user);
 
         // Assert
         expect(response).toBeTruthy();
+    });
+
+    it("throw an EmailAlreadyInUseError if the email is already in use", async () => {
+        // Arrange
+        const { sut, getUserByEmailRepository } = makeSut();
+        jest.spyOn(getUserByEmailRepository, "execute").mockResolvedValueOnce(
+            user
+        );
+
+        // Act
+        const promise = sut.execute(user);
+
+        // Assert
+        await expect(promise).rejects.toThrow(
+            new EmailAlreadyInUseError(user.email)
+        );
     });
 });
