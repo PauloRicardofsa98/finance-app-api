@@ -35,4 +35,20 @@ describe("DeleteUserUseCase", () => {
         expect(response).toBeTruthy();
         expect(response).toEqual(user);
     });
+
+    it("should call DeleteUserRepository with correct values", async () => {
+        // Arrange
+        const { sut, deleteUserRepository } = makeSut();
+        const deleteUserRepositorySpy = jest.spyOn(
+            deleteUserRepository,
+            "execute"
+        );
+        const uuid = faker.string.uuid();
+
+        // Act
+        await sut.execute(uuid);
+
+        // Assert
+        expect(deleteUserRepositorySpy).toHaveBeenCalledWith(uuid);
+    });
 });
