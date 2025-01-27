@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "test": "dotenv -e .env.test -- jest --passWithNoTests --silent",
-        "test:watch": "yarn test --watch",
+        "test:watch": "yarn test --watch --runInBand",
         "test:coverage": "yarn test -- --coverage",
         "postinstall": "husky install && prisma generate",
         "dev": "node --watch index.js"
