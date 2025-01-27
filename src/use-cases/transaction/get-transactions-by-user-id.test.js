@@ -2,13 +2,6 @@ import { faker } from "@faker-js/faker";
 import { GetTransactionsByUserIdUseCase } from "./get-transactions-by-user-id";
 
 describe("GetTransactionsByUserIdUseCase", () => {
-    const transaction = {
-        user_id: faker.string.uuid(),
-        name: faker.string.alphanumeric(10),
-        date: faker.date.anytime().toISOString(),
-        type: "EXPENSE",
-        amount: Number(faker.finance.amount()),
-    };
     const user = {
         first_name: faker.person.firstName(),
         last_name: faker.person.lastName(),
@@ -59,6 +52,22 @@ describe("GetTransactionsByUserIdUseCase", () => {
         // Arrange
         const { sut, getUserByIdRepositoryStub } = makeSut();
         const executeSpy = jest.spyOn(getUserByIdRepositoryStub, "execute");
+        const userId = faker.string.uuid();
+
+        // Act
+        await sut.execute(userId);
+
+        // Assert
+        expect(executeSpy).toHaveBeenCalledWith(userId);
+    });
+
+    it("should call GetTransactionsByUserIdRepository with correct values", async () => {
+        // Arrange
+        const { sut, getTransactionsByUserIdRepositoryStub } = makeSut();
+        const executeSpy = jest.spyOn(
+            getTransactionsByUserIdRepositoryStub,
+            "execute"
+        );
         const userId = faker.string.uuid();
 
         // Act
