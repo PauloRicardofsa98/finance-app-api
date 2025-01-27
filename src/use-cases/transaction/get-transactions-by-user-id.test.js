@@ -17,8 +17,8 @@ describe("GetTransactionsByUserIdUseCase", () => {
     };
 
     class GetTransactionsByUserIdRepositoryStub {
-        async execute(userId) {
-            return { ...transaction, userId };
+        async execute() {
+            return [];
         }
     }
 
@@ -52,7 +52,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
         const transactions = await sut.execute(userId);
 
         // Assert
-        expect(transactions).toEqual({ ...transaction, userId });
+        expect(transactions).toEqual([]);
     });
 
     it("should call GetUserByIdRepository with correct values", async () => {
