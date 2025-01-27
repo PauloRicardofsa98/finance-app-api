@@ -1,30 +1,18 @@
 import { faker } from "@faker-js/faker";
 import { GetUserBalanceUseCase } from "./get-user-balance";
 import { UserNotFoundError } from "../../errors/user";
+import { userBalance, user } from "../../tests";
 
 describe("GetUserBalance UseCase", () => {
-    const balance = {
-        earning: faker.number.int(),
-        expenses: faker.number.int(),
-        investments: faker.number.int(),
-        balance: faker.number.int(),
-    };
-
     class GetUserBalanceRepositoryStub {
         async execute() {
-            return balance;
+            return userBalance;
         }
     }
 
     class getUserByIdRepositoryStub {
         async execute() {
-            return {
-                id: faker.string.uuid(),
-                first_name: faker.person.firstName(),
-                last_name: faker.person.lastName(),
-                email: faker.internet.email(),
-                password: faker.internet.password(),
-            };
+            return user;
         }
     }
 
@@ -51,7 +39,7 @@ describe("GetUserBalance UseCase", () => {
 
         // Assert
         expect(response).toBeTruthy();
-        expect(response).toEqual(balance);
+        expect(response).toEqual(userBalance);
     });
 
     it("should throw UserNotFoundError when user is not found", async () => {
