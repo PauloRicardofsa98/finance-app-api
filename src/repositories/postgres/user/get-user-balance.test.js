@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { prisma } from "../../../../prisma/prisma";
+import { prisma } from "../../../../prisma/prisma.js";
 import { user as fakeUser } from "../../../tests";
 import { PostgresGetUserBalanceRepository } from "./get-user-balance";
 
@@ -66,6 +66,12 @@ describe("GetUserBalanceRepository", () => {
 
         //Act
         const result = await sut.execute(user.id);
+        console.log({
+            earning: result.earning.toString(),
+            expenses: result.expenses.toString(),
+            investments: result.investments.toString(),
+            balance: result.balance.toString(),
+        });
 
         //Assert
         expect(result.earning.toString()).toBe("10000");
@@ -109,5 +115,20 @@ describe("GetUserBalanceRepository", () => {
                 amount: true,
             },
         });
+    });
+
+    it("should throw if Prisma throws", async () => {
+        jest.spyOn(prisma.transaction, "aggregate").mockRejectedValueOnce(
+            new Error()
+        );
+
+        //Arrange
+        const sut = new PostgresGetUserBalanceRepository();
+
+        //Act
+        const promise = sut.execute(fakeUser.id);
+
+        //Assert
+        await expect(promise).rejects.toThrow();
     });
 });
