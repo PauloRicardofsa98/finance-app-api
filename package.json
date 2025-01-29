@@ -6,7 +6,7 @@
     "scripts": {
         "test": "dotenv -e .env.test -- jest --passWithNoTests --silent",
         "test:watch": "yarn test --watch --runInBand",
-        "test:coverage": "yarn test -- --coverage",
+        "test:coverage": "yarn test -- --coverage --runInBand",
         "postinstall": "husky install && prisma generate",
         "dev": "node --watch index.js"
     },
