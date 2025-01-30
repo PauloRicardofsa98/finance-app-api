@@ -1,15 +1,13 @@
 import "dotenv/config.js";
 
 import express from "express";
-
-import { userRouter } from "./src/routes/user.js";
-import { transactionRouter } from "./src/routes/transactions.js";
+import { transactionRouter, userRouter } from "./src/routes";
 
 const app = express();
 app.use(express.json());
 
-app.use("/api/user", userRouter);
-app.use("/api/transaction", transactionRouter);
+app.use("/api/users", userRouter);
+app.use("/api/transactions", transactionRouter);
 
 app.listen(process.env.PORT, () =>
     console.log(`listenning on port ${process.env.PORT}`)
