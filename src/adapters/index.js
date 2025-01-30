@@ -1,2 +1,2 @@
-export * from "./password-hasher";
-export * from "./id-generator";
+export * from "./password-hasher.js";
+export * from "./id-generator.js";
