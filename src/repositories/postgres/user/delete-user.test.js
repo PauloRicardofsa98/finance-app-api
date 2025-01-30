@@ -2,6 +2,7 @@ import { prisma } from "../../../../prisma/prisma";
 import { PostgresDeleteUserRepository } from "./delete-user";
 import { user } from "../../../tests";
 import { UserNotFoundError } from "../../../errors";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 describe("DeleteUserRepository", () => {
     it("should delete user on db", async () => {
@@ -49,13 +50,15 @@ describe("DeleteUserRepository", () => {
         // Arrange
         const sut = new PostgresDeleteUserRepository();
         jest.spyOn(prisma.user, "delete").mockRejectedValueOnce(
-            new UserNotFoundError()
+            new PrismaClientKnownRequestError("", {
+                code: "P2025",
+            })
         );
 
         // Act
         const promise = sut.execute(user.id);
 
         // Assert
-        await expect(promise).rejects.toThrow(new UserNotFoundError());
+        await expect(promise).rejects.toThrow(new UserNotFoundError(user.id));
     });
 });
