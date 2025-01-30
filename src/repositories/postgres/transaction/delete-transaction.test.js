@@ -2,6 +2,7 @@ import { prisma } from "../../../../prisma/prisma";
 import { PostgresDeleteTransactionRepository } from "./delete-transaction";
 import { user, transaction } from "../../../tests";
 import dayjs from "dayjs";
+import { TransactionNotFoundError } from "../../../errors";
 
 describe("DeleteTransactionRepository", () => {
     it("should delete a transaction on db", async () => {
@@ -67,5 +68,22 @@ describe("DeleteTransactionRepository", () => {
         // Assert
 
         await expect(promise).rejects.toThrow();
+    });
+
+    it("should throw UserNotFoundError if user does not exist", async () => {
+        // Arrange
+        const sut = new PostgresDeleteTransactionRepository();
+        jest.spyOn(prisma.transaction, "delete").mockRejectedValueOnce(
+            new TransactionNotFoundError(transaction.id)
+        );
+
+        // Act
+        const promise = sut.execute(transaction.id);
+
+        // Assert
+
+        await expect(promise).rejects.toThrow(
+            new TransactionNotFoundError(transaction.id)
+        );
     });
 });
