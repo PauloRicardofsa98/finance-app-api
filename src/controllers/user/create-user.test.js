@@ -166,4 +166,19 @@ describe("Create user Controller", () => {
 
         expect(result.statusCode).toBe(400);
     });
+
+    it("should return 400 when zod throws an error", async () => {
+        //arrange
+        const { sut } = makeSut();
+
+        //act
+        const response = await sut.execute({
+            body: {
+                first_name: "Paulo",
+            },
+        });
+
+        //assert
+        expect(response.statusCode).toBe(400);
+    });
 });
