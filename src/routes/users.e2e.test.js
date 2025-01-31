@@ -143,4 +143,15 @@ describe("User Routes E2E Tests", () => {
 
         expect(response.status).toBe(404);
     });
+
+    it("POST /api/users should return 400 when provided email is invalid", async () => {
+        const response = await request(app)
+            .post("/api/users")
+            .send({
+                ...user,
+                email: "invalid-email",
+            });
+
+        expect(response.status).toBe(400);
+    });
 });
