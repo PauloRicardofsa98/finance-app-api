@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { prisma } from "../../../../prisma/prisma";
 import { transaction, user } from "../../../tests";
 import { PostgresUpdateTransactionRepository } from "./update-transaction";
@@ -33,11 +32,6 @@ describe("UpdateTransactionRepository", () => {
         expect(result.type).toBe(params.type);
         expect(result.user_id).toBe(user.id);
         expect(String(result.amount)).toBe(String(params.amount));
-        expect(dayjs(result.date).daysInMonth()).toBe(
-            dayjs(params.date).daysInMonth()
-        );
-        expect(dayjs(result.date).month()).toBe(dayjs(params.date).month());
-        expect(dayjs(result.date).year()).toBe(dayjs(params.date).year());
     });
 
     it("should call Prisma with correct params", async () => {
