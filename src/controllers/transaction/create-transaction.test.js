@@ -233,4 +233,21 @@ describe("Create Transaction Controller", () => {
         //assert
         expect(response.statusCode).toBe(400);
     });
+
+    //testa erro do zod
+    it("should return 400 when zod throws an error", async () => {
+        //arrange
+        const { sut } = makeSut();
+
+        //act
+        const response = await sut.execute({
+            body: {
+                ...httpRequest.body,
+                date: "invalid_date",
+            },
+        });
+
+        //assert
+        expect(response.statusCode).toBe(400);
+    });
 });
