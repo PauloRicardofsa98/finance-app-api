@@ -42,6 +42,41 @@
                 }
             }
         },
+        "/api/users/{userId}/balance": {
+            "get": {
+                "summary": "Get user balance by id",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "User id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User balance found",
+                        "schema": {
+                            "$ref": "#/definitions/UserBalance"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/users/{userId}": {
             "get": {
                 "summary": "Get user by id",
@@ -196,6 +231,27 @@
                 "password": {
                     "type": "string",
                     "example": "123456"
+                }
+            }
+        },
+        "UserBalance": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "string",
+                    "example": 1000
+                },
+                "earnings": {
+                    "type": "string",
+                    "example": 100
+                },
+                "expenses": {
+                    "type": "string",
+                    "example": 100
+                },
+                "investments": {
+                    "type": "string",
+                    "example": 100
                 }
             }
         },
