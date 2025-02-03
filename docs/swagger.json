@@ -22,13 +22,19 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "User created"
+                        "description": "User created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     },
                     "400": {
                         "description": "invalid params"
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerError"
+                        }
                     }
                 }
             }
@@ -54,10 +60,16 @@
                         }
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserNotFound"
+                        }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerError"
+                        }
                     }
                 }
             },
@@ -75,13 +87,22 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "User deleted"
+                        "description": "User deleted",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserNotFound"
+                        }
                     },
                     "500": {
-                        "description": "Internal server error"
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerError"
+                        }
                     }
                 }
             }
@@ -131,6 +152,24 @@
                 "password": {
                     "type": "string",
                     "example": "123456"
+                }
+            }
+        },
+        "InternalServerError": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Internal server error"
+                }
+            }
+        },
+        "UserNotFound": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "User not found"
                 }
             }
         }
