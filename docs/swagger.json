@@ -212,7 +212,7 @@
                     "404": {
                         "description": "User not found",
                         "schema": {
-                            "$ref": "#/definitions/UserNotFoundResponse"
+                            "$ref": "#/definitions/TransactionNotFoundResponse"
                         }
                     },
                     "500": {
@@ -252,7 +252,50 @@
                     "404": {
                         "description": "User not found",
                         "schema": {
-                            "$ref": "#/definitions/UserNotFoundResponse"
+                            "$ref": "#/definitions/TransactionNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/{transactionId}": {
+            "patch": {
+                "summary": "Update transaction by id",
+                "tags": ["Transaction"],
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Transaction id"
+                    },
+                    {
+                        "name": "body",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateTransactionParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transaction updated",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionNotFoundResponse"
                         }
                     },
                     "500": {
@@ -396,6 +439,37 @@
                 "date": {
                     "type": "string",
                     "example": "2025-02-01T00:00:00.000Z"
+                }
+            }
+        },
+        "UpdateTransactionParams": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "salary"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "EARNING",
+                    "description": "EARNING, EXPENSE, INVESTMENT"
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 100
+                },
+                "date": {
+                    "type": "string",
+                    "example": "2025-02-01T00:00:00.000Z"
+                }
+            }
+        },
+        "TransactionNotFoundResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Transaction not found"
                 }
             }
         },
