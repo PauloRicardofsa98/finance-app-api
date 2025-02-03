@@ -8,7 +8,9 @@
         "test:watch": "yarn test --watch ",
         "test:coverage": "yarn test --coverage ",
         "postinstall": "husky install && prisma generate",
-        "dev": "node --watch index.js"
+        "dev": "node --watch index.js",
+        "eslint:check": "eslint src",
+        "prettier:check": "prettier --check src"
     },
     "keywords": [],
     "author": "",
