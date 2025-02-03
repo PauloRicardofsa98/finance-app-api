@@ -185,30 +185,51 @@
                     }
                 }
             }
+        },
+        "/api/transactions": {
+            "post": {
+                "summary": "Create a new transaction",
+                "tags": ["Transaction"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CreateTransactionParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Transaction created",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "invalid params",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidParamsResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "CreateUserParams": {
-            "type": "object",
-            "properties": {
-                "first_name": {
-                    "type": "string",
-                    "example": "John"
-                },
-                "last_name": {
-                    "type": "string",
-                    "example": "Doe"
-                },
-                "email": {
-                    "type": "string",
-                    "example": "example@example.com.br"
-                },
-                "password": {
-                    "type": "string",
-                    "example": "123456"
-                }
-            }
-        },
         "User": {
             "type": "object",
             "properties": {
@@ -255,12 +276,24 @@
                 }
             }
         },
-        "InternalServerErrorResponse": {
+        "CreateUserParams": {
             "type": "object",
             "properties": {
-                "message": {
+                "first_name": {
                     "type": "string",
-                    "example": "Internal server error"
+                    "example": "John"
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Doe"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "example@example.com.br"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "123456"
                 }
             }
         },
@@ -273,6 +306,74 @@
                 }
             }
         },
+
+        "Transaction": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
+                },
+                "user_id": {
+                    "type": "string",
+                    "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "salary"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "EARNING",
+                    "description": "EARNING, EXPENSE, INVESTMENT"
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 100
+                },
+                "date": {
+                    "type": "string",
+                    "example": "2025-02-01T00:00:00.000Z"
+                }
+            }
+        },
+        "CreateTransactionParams": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "string",
+                    "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "salary"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "EARNING",
+                    "description": "EARNING, EXPENSE, INVESTMENT"
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 100
+                },
+                "date": {
+                    "type": "string",
+                    "example": "2025-02-01T00:00:00.000Z"
+                }
+            }
+        },
+
+        "InternalServerErrorResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Internal server error"
+                }
+            }
+        },
+
         "InvalidParamsResponse": {
             "type": "object",
             "properties": {
