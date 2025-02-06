@@ -36,7 +36,7 @@ describe("DeleteTransactionUseCase", () => {
     it("should call DeleteTransactionRepository with correct values", async () => {
         // Arrange
         const { sut, deleteTransactionRepositoryStub } = makeSut();
-        const executeSpy = jest.spyOn(
+        const executeSpy = import.meta.jest.spyOn(
             deleteTransactionRepositoryStub,
             "execute",
         );
@@ -50,10 +50,9 @@ describe("DeleteTransactionUseCase", () => {
     it("should throw if DeleteTransactionRepository throws", async () => {
         // Arrange
         const { sut, deleteTransactionRepositoryStub } = makeSut();
-        jest.spyOn(
-            deleteTransactionRepositoryStub,
-            "execute",
-        ).mockRejectedValueOnce(new Error());
+        import.meta.jest
+            .spyOn(deleteTransactionRepositoryStub, "execute")
+            .mockRejectedValueOnce(new Error());
         // Act
         const promise = sut.execute(transaction.id);
         // Assert

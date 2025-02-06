@@ -97,9 +97,11 @@ describe("Update User Controller", () => {
     it("should return 400 if CreateUserUseCase throws an EmailAlreadyInUseError", async () => {
         const { sut, updateUserUseCase } = makeSut();
 
-        jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new EmailAlreadyInUseError(httpRequest.body.email),
-        );
+        import.meta.jest
+            .spyOn(updateUserUseCase, "execute")
+            .mockRejectedValueOnce(
+                new EmailAlreadyInUseError(httpRequest.body.email),
+            );
 
         const result = await sut.execute(httpRequest);
 
@@ -126,9 +128,9 @@ describe("Update User Controller", () => {
     it("should return 500 if CreateUserUseCase throws an exception", async () => {
         const { sut, updateUserUseCase } = makeSut();
 
-        jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new Error(),
-        );
+        import.meta.jest
+            .spyOn(updateUserUseCase, "execute")
+            .mockRejectedValueOnce(new Error());
 
         const result = await sut.execute(httpRequest);
 
@@ -138,7 +140,7 @@ describe("Update User Controller", () => {
     it("should call CreateUserUseCase with correct values", async () => {
         //arrange
         const { sut, updateUserUseCase } = makeSut();
-        const spy = jest.spyOn(updateUserUseCase, "execute");
+        const spy = import.meta.jest.spyOn(updateUserUseCase, "execute");
 
         //act
         await sut.execute(httpRequest);
@@ -153,9 +155,9 @@ describe("Update User Controller", () => {
     it("should return 404 if CreateUserUseCase throws an UserNotFoundError", async () => {
         const { sut, updateUserUseCase } = makeSut();
 
-        jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new UserNotFoundError(faker.string.uuid()),
-        );
+        import.meta.jest
+            .spyOn(updateUserUseCase, "execute")
+            .mockRejectedValueOnce(new UserNotFoundError(faker.string.uuid()));
 
         const result = await sut.execute(httpRequest);
 

@@ -46,7 +46,10 @@ describe("GetTransactionsByUserIdUseCase", () => {
     it("should call GetUserByIdRepository with correct values", async () => {
         // Arrange
         const { sut, getUserByIdRepositoryStub } = makeSut();
-        const executeSpy = jest.spyOn(getUserByIdRepositoryStub, "execute");
+        const executeSpy = import.meta.jest.spyOn(
+            getUserByIdRepositoryStub,
+            "execute",
+        );
         const userId = faker.string.uuid();
 
         // Act
@@ -59,7 +62,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
     it("should call GetTransactionsByUserIdRepository with correct values", async () => {
         // Arrange
         const { sut, getTransactionsByUserIdRepositoryStub } = makeSut();
-        const executeSpy = jest.spyOn(
+        const executeSpy = import.meta.jest.spyOn(
             getTransactionsByUserIdRepositoryStub,
             "execute",
         );
@@ -75,9 +78,9 @@ describe("GetTransactionsByUserIdUseCase", () => {
     it("should throw if UserNotFoundError if user does not exist", async () => {
         // Arrange
         const { sut, getUserByIdRepositoryStub } = makeSut();
-        jest.spyOn(getUserByIdRepositoryStub, "execute").mockResolvedValue(
-            null,
-        );
+        import.meta.jest
+            .spyOn(getUserByIdRepositoryStub, "execute")
+            .mockResolvedValue(null);
         const userId = faker.string.uuid();
 
         // Act
@@ -90,10 +93,9 @@ describe("GetTransactionsByUserIdUseCase", () => {
     it("should throw if GetTransactionsByUserIdRepository throws", async () => {
         // Arrange
         const { sut, getTransactionsByUserIdRepositoryStub } = makeSut();
-        jest.spyOn(
-            getTransactionsByUserIdRepositoryStub,
-            "execute",
-        ).mockRejectedValue(new Error());
+        import.meta.jest
+            .spyOn(getTransactionsByUserIdRepositoryStub, "execute")
+            .mockRejectedValue(new Error());
         const userId = faker.string.uuid();
 
         // Act

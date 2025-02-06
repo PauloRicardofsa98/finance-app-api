@@ -23,7 +23,7 @@ describe("DeleteUserRepository", () => {
 
         // Arrange
         const sut = new PostgresDeleteUserRepository();
-        const spy = jest.spyOn(prisma.user, "delete");
+        const spy = import.meta.jest.spyOn(prisma.user, "delete");
 
         // Act
         await sut.execute(user.id);
@@ -37,7 +37,9 @@ describe("DeleteUserRepository", () => {
     it("should throw if prisma throws", async () => {
         // Arrange
         const sut = new PostgresDeleteUserRepository();
-        jest.spyOn(prisma.user, "delete").mockRejectedValueOnce(new Error());
+        import.meta.jest
+            .spyOn(prisma.user, "delete")
+            .mockRejectedValueOnce(new Error());
 
         // Act
         const promise = sut.execute(user.id);
@@ -49,7 +51,7 @@ describe("DeleteUserRepository", () => {
     it("should throw UserNotFoundError if user does not exist", async () => {
         // Arrange
         const sut = new PostgresDeleteUserRepository();
-        jest.spyOn(prisma.user, "delete").mockRejectedValueOnce(
+        import.meta.jest.spyOn(prisma.user, "delete").mockRejectedValueOnce(
             new PrismaClientKnownRequestError("", {
                 code: "P2025",
             }),
