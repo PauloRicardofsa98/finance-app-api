@@ -98,7 +98,7 @@ describe("Update User Controller", () => {
         const { sut, updateUserUseCase } = makeSut();
 
         jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new EmailAlreadyInUseError(httpRequest.body.email)
+            new EmailAlreadyInUseError(httpRequest.body.email),
         );
 
         const result = await sut.execute(httpRequest);
@@ -127,7 +127,7 @@ describe("Update User Controller", () => {
         const { sut, updateUserUseCase } = makeSut();
 
         jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         const result = await sut.execute(httpRequest);
@@ -146,7 +146,7 @@ describe("Update User Controller", () => {
         //assert
         expect(spy).toHaveBeenCalledWith(
             httpRequest.params.userId,
-            httpRequest.body
+            httpRequest.body,
         );
     });
 
@@ -154,7 +154,7 @@ describe("Update User Controller", () => {
         const { sut, updateUserUseCase } = makeSut();
 
         jest.spyOn(updateUserUseCase, "execute").mockRejectedValueOnce(
-            new UserNotFoundError(faker.string.uuid())
+            new UserNotFoundError(faker.string.uuid()),
         );
 
         const result = await sut.execute(httpRequest);

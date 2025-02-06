@@ -4,7 +4,7 @@ export class CreateTransactionUseCase {
     constructor(
         createTransactionRepository,
         getUserByIdRepository,
-        idGeneratorAdapter
+        idGeneratorAdapter,
     ) {
         this.createTransactionRepository = createTransactionRepository;
         this.getUserByIdRepository = getUserByIdRepository;

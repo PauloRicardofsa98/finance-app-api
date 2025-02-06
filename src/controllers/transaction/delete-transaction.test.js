@@ -53,7 +53,7 @@ describe("Delete Transaction Controller", () => {
         //arrange
         const { sut, deleteTransactionUseCase } = makeSut();
         jest.spyOn(deleteTransactionUseCase, "execute").mockRejectedValueOnce(
-            new TransactionNotFoundError()
+            new TransactionNotFoundError(),
         );
 
         //act
@@ -67,7 +67,7 @@ describe("Delete Transaction Controller", () => {
         //arrange
         const { sut, deleteTransactionUseCase } = makeSut();
         jest.spyOn(deleteTransactionUseCase, "execute").mockRejectedValue(
-            new Error()
+            new Error(),
         );
 
         //act
@@ -87,7 +87,7 @@ describe("Delete Transaction Controller", () => {
 
         //assert
         expect(executeSpy).toHaveBeenCalledWith(
-            httpRequest.params.transactionId
+            httpRequest.params.transactionId,
         );
     });
 });

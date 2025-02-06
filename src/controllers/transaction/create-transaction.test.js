@@ -198,7 +198,7 @@ describe("Create Transaction Controller", () => {
         //arrange
         const { sut, createTransactionUseCase } = makeSut();
         jest.spyOn(createTransactionUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         //act
@@ -224,7 +224,7 @@ describe("Create Transaction Controller", () => {
         //arrange
         const { sut, createTransactionUseCase } = makeSut();
         jest.spyOn(createTransactionUseCase, "execute").mockRejectedValueOnce(
-            new UserNotFoundError()
+            new UserNotFoundError(),
         );
 
         //act

@@ -58,7 +58,7 @@ describe("UpdateTransactionRepository", () => {
         // Arrange
         const sut = new PostgresUpdateTransactionRepository();
         jest.spyOn(prisma.transaction, "update").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -78,7 +78,7 @@ describe("UpdateTransactionRepository", () => {
         jest.spyOn(prisma.user, "update").mockRejectedValueOnce(
             new PrismaClientKnownRequestError("", {
                 code: "P2025",
-            })
+            }),
         );
 
         // Act
@@ -88,7 +88,7 @@ describe("UpdateTransactionRepository", () => {
 
         // Assert
         await expect(promise).rejects.toThrow(
-            new TransactionNotFoundError(transaction.id)
+            new TransactionNotFoundError(transaction.id),
         );
     });
 });

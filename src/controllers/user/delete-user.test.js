@@ -49,7 +49,7 @@ describe("Delete user Controller", () => {
         //arrange
         const { sut, deleteUserUseCase } = makeSut();
         jest.spyOn(deleteUserUseCase, "execute").mockRejectedValueOnce(
-            new UserNotFoundError()
+            new UserNotFoundError(),
         );
 
         //act
@@ -63,7 +63,7 @@ describe("Delete user Controller", () => {
         //arrange
         const { sut, deleteUserUseCase } = makeSut();
         jest.spyOn(deleteUserUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         //act

@@ -49,7 +49,7 @@ describe("Get User Balance Controller", () => {
         // arrange
         const { sut, getUserBalanceUseCaseStup } = makeSut();
         jest.spyOn(getUserBalanceUseCaseStup, "execute").mockRejectedValueOnce(
-            new UserNotFoundError(httpRequest.params.userId)
+            new UserNotFoundError(httpRequest.params.userId),
         );
 
         // act
@@ -63,7 +63,7 @@ describe("Get User Balance Controller", () => {
         // arrange
         const { sut, getUserBalanceUseCaseStup } = makeSut();
         jest.spyOn(getUserBalanceUseCaseStup, "execute").mockRejectedValueOnce(
-            new Error("Error")
+            new Error("Error"),
         );
 
         // act

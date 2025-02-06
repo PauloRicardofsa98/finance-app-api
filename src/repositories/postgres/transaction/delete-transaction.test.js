@@ -52,7 +52,7 @@ describe("DeleteTransactionRepository", () => {
         });
         const sut = new PostgresDeleteTransactionRepository();
         jest.spyOn(prisma.transaction, "delete").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -69,7 +69,7 @@ describe("DeleteTransactionRepository", () => {
         jest.spyOn(prisma.transaction, "delete").mockRejectedValueOnce(
             new PrismaClientKnownRequestError("", {
                 code: "P2025",
-            })
+            }),
         );
 
         // Act
@@ -78,7 +78,7 @@ describe("DeleteTransactionRepository", () => {
         // Assert
 
         await expect(promise).rejects.toThrow(
-            new TransactionNotFoundError(transaction.id)
+            new TransactionNotFoundError(transaction.id),
         );
     });
 });

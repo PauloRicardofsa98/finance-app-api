@@ -16,7 +16,7 @@ describe("DeleteTransactionUseCase", () => {
         const deleteTransactionRepositoryStub =
             new DeleteTransactionRepositoryStub();
         const sut = new DeleteTransactionUseCase(
-            deleteTransactionRepositoryStub
+            deleteTransactionRepositoryStub,
         );
         return { sut, deleteTransactionRepositoryStub };
     };
@@ -38,7 +38,7 @@ describe("DeleteTransactionUseCase", () => {
         const { sut, deleteTransactionRepositoryStub } = makeSut();
         const executeSpy = jest.spyOn(
             deleteTransactionRepositoryStub,
-            "execute"
+            "execute",
         );
         const id = faker.string.uuid();
         // Act
@@ -52,7 +52,7 @@ describe("DeleteTransactionUseCase", () => {
         const { sut, deleteTransactionRepositoryStub } = makeSut();
         jest.spyOn(
             deleteTransactionRepositoryStub,
-            "execute"
+            "execute",
         ).mockRejectedValueOnce(new Error());
         // Act
         const promise = sut.execute(transaction.id);

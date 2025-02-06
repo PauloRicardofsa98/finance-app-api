@@ -16,7 +16,7 @@ import {
 describe("User Controller Factories", () => {
     it("should return a valid GetUserByIdController instance", () => {
         expect(makeGetUserByIdController()).toBeInstanceOf(
-            GetUserByIdController
+            GetUserByIdController,
         );
     });
     it("should return a valid CreateUserController instance", () => {
@@ -32,7 +32,7 @@ describe("User Controller Factories", () => {
     });
     it("should return a valid GetUserBalanceController instance", () => {
         expect(makeGetUserBalanceController()).toBeInstanceOf(
-            GetUserBalanceController
+            GetUserBalanceController,
         );
     });
 });

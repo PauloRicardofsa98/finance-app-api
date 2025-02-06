@@ -35,7 +35,7 @@ describe("GetUserById UseCase", () => {
         const { sut, getUserByIdRepository } = makeSut();
         const getUserByIdRepositorySpy = jest.spyOn(
             getUserByIdRepository,
-            "execute"
+            "execute",
         );
         const uuid = faker.string.uuid();
 
@@ -50,7 +50,7 @@ describe("GetUserById UseCase", () => {
         // Arrange
         const { sut, getUserByIdRepository } = makeSut();
         jest.spyOn(getUserByIdRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act

@@ -27,7 +27,7 @@ export const makeGetTransactionByUserIdController = () => {
 
     const getTransactionsByUserIdUseCase = new GetTransactionsByUserIdUseCase(
         getTransactionsByUserId,
-        getUserByIdRepository
+        getUserByIdRepository,
     );
 
     const getTransactionsByUserIdController =
@@ -45,11 +45,11 @@ export const makeCreateTransactionController = () => {
     const createTransactionUseCase = new CreateTransactionUseCase(
         createTransactionRepository,
         getUserByIdRepository,
-        idGeneratorAdapter
+        idGeneratorAdapter,
     );
 
     const createTransactionController = new CreateTransactionController(
-        createTransactionUseCase
+        createTransactionUseCase,
     );
 
     return createTransactionController;
@@ -59,11 +59,11 @@ export const makeUpdateTransactionController = () => {
         new PostgresUpdateTransactionRepository();
 
     const updateTransactionUseCase = new UpdateTransactionUseCase(
-        updateTransactionRepository
+        updateTransactionRepository,
     );
 
     const updateTransactionController = new UpdateTransactionController(
-        updateTransactionUseCase
+        updateTransactionUseCase,
     );
 
     return updateTransactionController;
@@ -73,11 +73,11 @@ export const makeDeleteTransactionController = () => {
         new PostgresDeleteTransactionRepository();
 
     const deleteTransactionUseCase = new DeleteTransactionUseCase(
-        deleteTransactionRepository
+        deleteTransactionRepository,
     );
 
     const deleteTransactionController = new DeleteTransactionController(
-        deleteTransactionUseCase
+        deleteTransactionUseCase,
     );
 
     return deleteTransactionController;

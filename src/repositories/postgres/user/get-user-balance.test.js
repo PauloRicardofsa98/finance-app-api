@@ -119,7 +119,7 @@ describe("GetUserBalanceRepository", () => {
 
     it("should throw if Prisma throws", async () => {
         jest.spyOn(prisma.transaction, "aggregate").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         //Arrange

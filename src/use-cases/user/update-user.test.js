@@ -29,7 +29,7 @@ describe("UpdateUser UseCase", () => {
         const sut = new UpdateUserUseCase(
             getUserByEmailRepository,
             updateUserRepository,
-            passwordHasherAdapter
+            passwordHasherAdapter,
         );
         return {
             sut,
@@ -59,7 +59,7 @@ describe("UpdateUser UseCase", () => {
         const { sut, getUserByEmailRepository } = makeSut();
         const getUserByEmailRepositorySpy = jest.spyOn(
             getUserByEmailRepository,
-            "execute"
+            "execute",
         );
 
         const email = faker.internet.email();
@@ -79,7 +79,7 @@ describe("UpdateUser UseCase", () => {
         const { sut, passwordHasherAdapter } = makeSut();
         const passwordHasherAdapterSpy = jest.spyOn(
             passwordHasherAdapter,
-            "execute"
+            "execute",
         );
 
         const password = faker.internet.password();
@@ -109,7 +109,7 @@ describe("UpdateUser UseCase", () => {
 
         // Assert
         await expect(promise).rejects.toThrow(
-            new EmailAlreadyInUseError(email)
+            new EmailAlreadyInUseError(email),
         );
     });
 
@@ -118,7 +118,7 @@ describe("UpdateUser UseCase", () => {
         const { sut, updateUserRepository } = makeSut();
         const updateUserRepositorySpy = jest.spyOn(
             updateUserRepository,
-            "execute"
+            "execute",
         );
         const updateUserParams = {
             first_name: user.first_name,
@@ -140,7 +140,7 @@ describe("UpdateUser UseCase", () => {
         // Arrange
         const { sut, getUserByEmailRepository } = makeSut();
         jest.spyOn(getUserByEmailRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -156,7 +156,7 @@ describe("UpdateUser UseCase", () => {
         // Arrange
         const { sut, passwordHasherAdapter } = makeSut();
         jest.spyOn(passwordHasherAdapter, "execute").mockRejectedValue(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -172,7 +172,7 @@ describe("UpdateUser UseCase", () => {
         // Arrange
         const { sut, updateUserRepository } = makeSut();
         jest.spyOn(updateUserRepository, "execute").mockRejectedValue(
-            new Error()
+            new Error(),
         );
 
         // Act

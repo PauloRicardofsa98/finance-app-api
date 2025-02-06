@@ -22,7 +22,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
         const getUserByIdRepositoryStub = new GetUserByIdRepositoryStub();
         const sut = new GetTransactionsByUserIdUseCase(
             getTransactionsByUserIdRepositoryStub,
-            getUserByIdRepositoryStub
+            getUserByIdRepositoryStub,
         );
         return {
             sut,
@@ -61,7 +61,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
         const { sut, getTransactionsByUserIdRepositoryStub } = makeSut();
         const executeSpy = jest.spyOn(
             getTransactionsByUserIdRepositoryStub,
-            "execute"
+            "execute",
         );
         const userId = faker.string.uuid();
 
@@ -76,7 +76,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
         // Arrange
         const { sut, getUserByIdRepositoryStub } = makeSut();
         jest.spyOn(getUserByIdRepositoryStub, "execute").mockResolvedValue(
-            null
+            null,
         );
         const userId = faker.string.uuid();
 
@@ -92,7 +92,7 @@ describe("GetTransactionsByUserIdUseCase", () => {
         const { sut, getTransactionsByUserIdRepositoryStub } = makeSut();
         jest.spyOn(
             getTransactionsByUserIdRepositoryStub,
-            "execute"
+            "execute",
         ).mockRejectedValue(new Error());
         const userId = faker.string.uuid();
 

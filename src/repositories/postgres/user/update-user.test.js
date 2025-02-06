@@ -54,7 +54,7 @@ describe("UpdateUserRepository", () => {
         jest.spyOn(prisma.user, "update").mockRejectedValueOnce(
             new PrismaClientKnownRequestError("", {
                 code: "P2025",
-            })
+            }),
         );
 
         const userId = faker.string.uuid();

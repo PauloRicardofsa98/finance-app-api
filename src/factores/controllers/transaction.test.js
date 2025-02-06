@@ -14,25 +14,25 @@ import {
 describe("Transaction Controller Factories", () => {
     it("should return a valid CreateTransactionController instance", () => {
         expect(makeCreateTransactionController()).toBeInstanceOf(
-            CreateTransactionController
+            CreateTransactionController,
         );
     });
 
     it("should return a valid UpdateTransactionController instance", () => {
         expect(makeUpdateTransactionController()).toBeInstanceOf(
-            UpdateTransactionController
+            UpdateTransactionController,
         );
     });
 
     it("should return a valid DeleteTransactionController instance", () => {
         expect(makeDeleteTransactionController()).toBeInstanceOf(
-            DeleteTransactionController
+            DeleteTransactionController,
         );
     });
 
     it("should return a valid GetTransactionByUserIdController instance", () => {
         expect(makeGetTransactionByUserIdController()).toBeInstanceOf(
-            GetTransactionsByUserIdController
+            GetTransactionsByUserIdController,
         );
     });
 });

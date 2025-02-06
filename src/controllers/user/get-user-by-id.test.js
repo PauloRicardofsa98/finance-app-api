@@ -62,7 +62,7 @@ describe("Get User By Id Controller", () => {
         //arrange
         const { sut, getUserByIdUseCase } = makeSut();
         jest.spyOn(getUserByIdUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // act

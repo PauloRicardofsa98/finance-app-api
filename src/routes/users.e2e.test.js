@@ -65,7 +65,7 @@ describe("User Routes E2E Tests", () => {
             });
 
         const response = await request(app).delete(
-            `/api/users/${createdUser.id}`
+            `/api/users/${createdUser.id}`,
         );
 
         expect(response.status).toBe(200);
@@ -103,7 +103,7 @@ describe("User Routes E2E Tests", () => {
         });
 
         const response = await request(app).get(
-            `/api/users/${createdUser.id}/balance`
+            `/api/users/${createdUser.id}/balance`,
         );
 
         expect(response.status).toBe(200);
@@ -117,7 +117,7 @@ describe("User Routes E2E Tests", () => {
 
     it("GET /api/users/:userId should return 404 when user is not found", async () => {
         const response = await request(app).get(
-            `/api/users/${faker.string.uuid()}`
+            `/api/users/${faker.string.uuid()}`,
         );
 
         expect(response.status).toBe(404);
@@ -125,7 +125,7 @@ describe("User Routes E2E Tests", () => {
 
     it("GET /api/users/:userId/balance should return 404 when user balance is not found", async () => {
         const response = await request(app).get(
-            `/api/users/${faker.string.uuid()}/balance`
+            `/api/users/${faker.string.uuid()}/balance`,
         );
 
         expect(response.status).toBe(404);

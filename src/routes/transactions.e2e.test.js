@@ -44,7 +44,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const response = await request(app).get(
-            `/api/transactions?userId=${createdUser.id}`
+            `/api/transactions?userId=${createdUser.id}`,
         );
 
         expect(response.status).toBe(200);
@@ -77,7 +77,7 @@ describe("Transaction Routes E2E Tests", () => {
 
         expect(response.status).toBe(200);
         expect(response.body.amount).toBe(
-            String(updateTransactionParams.amount)
+            String(updateTransactionParams.amount),
         );
     });
 
@@ -98,7 +98,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const response = await request(app).delete(
-            `/api/transactions/${createdTransaction.id}`
+            `/api/transactions/${createdTransaction.id}`,
         );
 
         expect(response.status).toBe(200);
@@ -118,7 +118,7 @@ describe("Transaction Routes E2E Tests", () => {
 
     it("DELETE /api/transactions/:transactionId should return 404 when transaction is not found", async () => {
         const response = await request(app).delete(
-            `/api/transactions/${faker.string.uuid()}`
+            `/api/transactions/${faker.string.uuid()}`,
         );
 
         expect(response.status).toBe(404);
@@ -126,7 +126,7 @@ describe("Transaction Routes E2E Tests", () => {
 
     it("GET /api/transactions?userId should return 404 when transaction is not found", async () => {
         const response = await request(app).get(
-            `/api/transactions?userId=${faker.string.uuid()}`
+            `/api/transactions?userId=${faker.string.uuid()}`,
         );
 
         expect(response.status).toBe(404);

@@ -111,7 +111,7 @@ describe("Update Transaction Controller", () => {
         //arrange
         const { sut, updateTransactionUseCase } = makeSut();
         jest.spyOn(updateTransactionUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         //act
@@ -132,7 +132,7 @@ describe("Update Transaction Controller", () => {
         //assert
         expect(executeSpy).toHaveBeenCalledWith(
             httpRequest.params.transactionId,
-            httpRequest.body
+            httpRequest.body,
         );
     });
 
@@ -140,7 +140,7 @@ describe("Update Transaction Controller", () => {
         const { sut, updateTransactionUseCase } = makeSut();
 
         jest.spyOn(updateTransactionUseCase, "execute").mockRejectedValueOnce(
-            new TransactionNotFoundError(faker.string.uuid())
+            new TransactionNotFoundError(faker.string.uuid()),
         );
 
         const result = await sut.execute(httpRequest);

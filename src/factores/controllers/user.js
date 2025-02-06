@@ -46,7 +46,7 @@ export const makeCreateUserController = () => {
         getUserByEmailRepository,
         createUserRepository,
         passwordHasherAdapter,
-        idGeneratorAdapter
+        idGeneratorAdapter,
     );
 
     const createUserController = new CreateUserController(createUserUseCase);
@@ -62,7 +62,7 @@ export const makeUpdateUserController = () => {
     const updateUserUseCase = new UpdateUserUseCase(
         getUserByEmailRepository,
         updateUserRepository,
-        passwordHasherAdapter
+        passwordHasherAdapter,
     );
 
     const updateUserController = new UpdateUserController(updateUserUseCase);
@@ -84,11 +84,11 @@ export const makeGetUserBalanceController = () => {
 
     const getUserBalanceUseCase = new GetUserBalanceUseCase(
         getUserBalanceRepository,
-        getUserByIdRepository
+        getUserByIdRepository,
     );
 
     const getUserBalanceController = new GetUserBalanceController(
-        getUserBalanceUseCase
+        getUserBalanceUseCase,
     );
 
     return getUserBalanceController;

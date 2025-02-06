@@ -10,7 +10,7 @@ export class UpdateUserUseCase {
     async execute(userId, updateUserParams) {
         if (updateUserParams.email) {
             const userAlreadyExists = await this.getUserByEmail.execute(
-                updateUserParams.email
+                updateUserParams.email,
             );
             if (userAlreadyExists && userAlreadyExists.id !== userId) {
                 throw new EmailAlreadyInUseError(updateUserParams.email);
@@ -21,14 +21,14 @@ export class UpdateUserUseCase {
 
         if (updateUserParams.password) {
             const hashedPassword = await this.passwordHasherAdapter.execute(
-                updateUserParams.password
+                updateUserParams.password,
             );
             user.password = hashedPassword;
         }
 
         const updatedUser = await this.updateUserRepository.execute(
             userId,
-            user
+            user,
         );
         return updatedUser;
     }

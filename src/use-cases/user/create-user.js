@@ -5,7 +5,7 @@ export class CreateUserUseCase {
         getUserByEmailRepository,
         createUserRepository,
         passwordHasherAdapter,
-        idGeneratorAdapter
+        idGeneratorAdapter,
     ) {
         this.getUserByEmailRepository = getUserByEmailRepository;
         this.createUserRepository = createUserRepository;
@@ -15,7 +15,7 @@ export class CreateUserUseCase {
 
     async execute(createUserParams) {
         const userAlreadyExists = await this.getUserByEmailRepository.execute(
-            createUserParams.email
+            createUserParams.email,
         );
         if (userAlreadyExists) {
             throw new EmailAlreadyInUseError(createUserParams.email);
@@ -24,7 +24,7 @@ export class CreateUserUseCase {
         const userId = this.idGeneratorAdapter.execute();
 
         const hashedPassword = await this.passwordHasherAdapter.execute(
-            createUserParams.password
+            createUserParams.password,
         );
 
         const user = {

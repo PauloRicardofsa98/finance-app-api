@@ -38,7 +38,7 @@ describe("Create User Use Case", () => {
             getUserByEmailRepository,
             createUserRepository,
             passwordHasherAdapter,
-            idGeneratorAdapter
+            idGeneratorAdapter,
         );
         return {
             sut,
@@ -64,7 +64,7 @@ describe("Create User Use Case", () => {
         // Arrange
         const { sut, getUserByEmailRepository } = makeSut();
         jest.spyOn(getUserByEmailRepository, "execute").mockResolvedValueOnce(
-            user
+            user,
         );
 
         // Act
@@ -72,7 +72,7 @@ describe("Create User Use Case", () => {
 
         // Assert
         await expect(promise).rejects.toThrow(
-            new EmailAlreadyInUseError(user.email)
+            new EmailAlreadyInUseError(user.email),
         );
     });
 
@@ -87,11 +87,11 @@ describe("Create User Use Case", () => {
         const idGeneratorAdapterSpy = jest.spyOn(idGeneratorAdapter, "execute");
         const createUserRepositorySpy = jest.spyOn(
             createUserRepository,
-            "execute"
+            "execute",
         );
         const passwordHasherAdapterSpy = jest.spyOn(
             passwordHasherAdapter,
-            "execute"
+            "execute",
         );
 
         // Act
@@ -111,7 +111,7 @@ describe("Create User Use Case", () => {
         // Arrange
         const { sut, getUserByEmailRepository } = makeSut();
         jest.spyOn(getUserByEmailRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -139,7 +139,7 @@ describe("Create User Use Case", () => {
         // Arrange
         const { sut, passwordHasherAdapter } = makeSut();
         jest.spyOn(passwordHasherAdapter, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -153,7 +153,7 @@ describe("Create User Use Case", () => {
         // Arrange
         const { sut, createUserRepository } = makeSut();
         jest.spyOn(createUserRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act

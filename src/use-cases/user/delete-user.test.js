@@ -35,7 +35,7 @@ describe("DeleteUserUseCase", () => {
         const { sut, deleteUserRepository } = makeSut();
         const deleteUserRepositorySpy = jest.spyOn(
             deleteUserRepository,
-            "execute"
+            "execute",
         );
         const uuid = faker.string.uuid();
 
@@ -50,7 +50,7 @@ describe("DeleteUserUseCase", () => {
         // Arrange
         const { sut, deleteUserRepository } = makeSut();
         jest.spyOn(deleteUserRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act

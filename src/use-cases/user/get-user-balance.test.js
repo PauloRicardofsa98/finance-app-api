@@ -21,7 +21,7 @@ describe("GetUserBalance UseCase", () => {
         const getUserByIdRepository = new getUserByIdRepositoryStub();
         const sut = new GetUserBalanceUseCase(
             getUserBalanceRepository,
-            getUserByIdRepository
+            getUserByIdRepository,
         );
         return {
             sut,
@@ -59,7 +59,7 @@ describe("GetUserBalance UseCase", () => {
         const { sut, getUserByIdRepository } = makeSut();
         const getUserByIdRepositorySpy = jest.spyOn(
             getUserByIdRepository,
-            "execute"
+            "execute",
         );
         const uuid = faker.string.uuid();
 
@@ -75,7 +75,7 @@ describe("GetUserBalance UseCase", () => {
         const { sut, getUserBalanceRepository } = makeSut();
         const getUserBalanceRepositorySpy = jest.spyOn(
             getUserBalanceRepository,
-            "execute"
+            "execute",
         );
         const uuid = faker.string.uuid();
 
@@ -90,7 +90,7 @@ describe("GetUserBalance UseCase", () => {
         // Arrange
         const { sut, getUserBalanceRepository } = makeSut();
         jest.spyOn(getUserBalanceRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act
@@ -104,7 +104,7 @@ describe("GetUserBalance UseCase", () => {
         // Arrange
         const { sut, getUserByIdRepository } = makeSut();
         jest.spyOn(getUserByIdRepository, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         // Act

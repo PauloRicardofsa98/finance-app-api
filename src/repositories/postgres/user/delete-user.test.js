@@ -52,7 +52,7 @@ describe("DeleteUserRepository", () => {
         jest.spyOn(prisma.user, "delete").mockRejectedValueOnce(
             new PrismaClientKnownRequestError("", {
                 code: "P2025",
-            })
+            }),
         );
 
         // Act

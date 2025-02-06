@@ -34,7 +34,7 @@ export class UpdateUserController {
 
             const updatedUser = await this.updateUserUseCase.execute(
                 userId,
-                params
+                params,
             );
 
             return ok(updatedUser);

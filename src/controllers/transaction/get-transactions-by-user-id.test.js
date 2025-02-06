@@ -68,7 +68,7 @@ describe("Get Transactions By User Id Controller", () => {
         //arrange
         const { sut, getUserByIdUseCase } = makeSut();
         jest.spyOn(getUserByIdUseCase, "execute").mockRejectedValueOnce(
-            new UserNotFoundError()
+            new UserNotFoundError(),
         );
 
         //act
@@ -86,7 +86,7 @@ describe("Get Transactions By User Id Controller", () => {
         //arrange
         const { sut, getUserByIdUseCase } = makeSut();
         jest.spyOn(getUserByIdUseCase, "execute").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         //act

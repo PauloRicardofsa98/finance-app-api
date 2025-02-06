@@ -31,7 +31,7 @@ describe("CreateTransactionUseCase", () => {
         const sut = new CreateTransactionUseCase(
             createTransactionRepositoryStub,
             getUserByIdRepositoryStub,
-            idGeneratorAdapterStub
+            idGeneratorAdapterStub,
         );
         return {
             sut,
@@ -62,7 +62,7 @@ describe("CreateTransactionUseCase", () => {
 
         // Assert
         expect(executeSpy).toHaveBeenCalledWith(
-            createTransactionParams.user_id
+            createTransactionParams.user_id,
         );
     });
 
@@ -83,7 +83,7 @@ describe("CreateTransactionUseCase", () => {
         const { sut, createTransactionRepositoryStub } = makeSut();
         const executeSpy = jest.spyOn(
             createTransactionRepositoryStub,
-            "execute"
+            "execute",
         );
 
         // Act
@@ -106,7 +106,7 @@ describe("CreateTransactionUseCase", () => {
 
         // Assert
         await expect(promise).rejects.toThrow(
-            new UserNotFoundError(createTransactionParams.user_id)
+            new UserNotFoundError(createTransactionParams.user_id),
         );
     });
 
@@ -116,7 +116,7 @@ describe("CreateTransactionUseCase", () => {
         jest.spyOn(getUserByIdRepositoryStub, "execute").mockImplementation(
             () => {
                 throw new Error();
-            }
+            },
         );
 
         // Act
@@ -131,7 +131,7 @@ describe("CreateTransactionUseCase", () => {
         const { sut, createTransactionRepositoryStub } = makeSut();
         jest.spyOn(
             createTransactionRepositoryStub,
-            "execute"
+            "execute",
         ).mockImplementation(() => {
             throw new Error();
         });

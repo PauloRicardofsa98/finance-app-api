@@ -32,14 +32,14 @@ describe("UpdateTransactionUseCase", () => {
         const { sut, updateTransactionRepository } = makeSut();
         const updateTransactionRepositorySpy = jest.spyOn(
             updateTransactionRepository,
-            "execute"
+            "execute",
         );
         // Act
         await sut.execute(transaction.id, { amount: transaction.amount });
         // Assert
         expect(updateTransactionRepositorySpy).toHaveBeenCalledWith(
             transaction.id,
-            { amount: transaction.amount }
+            { amount: transaction.amount },
         );
     });
 
@@ -48,7 +48,7 @@ describe("UpdateTransactionUseCase", () => {
         const { sut, updateTransactionRepository } = makeSut();
         jest.spyOn(
             updateTransactionRepository,
-            "execute"
+            "execute",
         ).mockRejectedValueOnce(new Error());
         // Act
         const promise = sut.execute(transaction.id, {

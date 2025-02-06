@@ -33,7 +33,7 @@ export class UpdateTransactionController {
             const updatedTransaction =
                 await this.updateTransactionUseCase.execute(
                     transactionId,
-                    params
+                    params,
                 );
 
             return ok(updatedTransaction);

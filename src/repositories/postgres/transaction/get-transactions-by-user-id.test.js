@@ -19,13 +19,13 @@ describe("GetTransactionsByUserIdRepository", () => {
         expect(result[0].user_id).toBe(user.id);
         expect(String(result[0].amount)).toBe(String(transaction.amount));
         expect(dayjs(result[0].date).daysInMonth()).toBe(
-            dayjs(transaction.date).daysInMonth()
+            dayjs(transaction.date).daysInMonth(),
         );
         expect(dayjs(result[0].date).month()).toBe(
-            dayjs(transaction.date).month()
+            dayjs(transaction.date).month(),
         );
         expect(dayjs(result[0].date).year()).toBe(
-            dayjs(transaction.date).year()
+            dayjs(transaction.date).year(),
         );
     });
 
@@ -43,7 +43,7 @@ describe("GetTransactionsByUserIdRepository", () => {
     it("should throw if prisma throws", async () => {
         const sut = new PostgresGetTransactionsByUserIdRepository();
         jest.spyOn(prisma.transaction, "findMany").mockRejectedValueOnce(
-            new Error()
+            new Error(),
         );
 
         const promise = sut.execute(user.id);

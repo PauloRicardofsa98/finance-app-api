@@ -11,9 +11,8 @@ export const transactionRouter = Router();
 transactionRouter.get("/", async (req, res) => {
     const getTransactionByUserIdController =
         makeGetTransactionByUserIdController();
-    const { statusCode, body } = await getTransactionByUserIdController.execute(
-        req
-    );
+    const { statusCode, body } =
+        await getTransactionByUserIdController.execute(req);
     res.status(statusCode).json(body);
 });
 

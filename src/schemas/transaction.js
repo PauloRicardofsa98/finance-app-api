@@ -38,7 +38,7 @@ export const createTransactionSchema = z.object({
                 digits_after_decimal: [2],
                 allow_decimal: true,
                 decimal_separator: ".",
-            })
+            }),
         ),
 });
 
