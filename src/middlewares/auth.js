@@ -2,9 +2,10 @@ import jwt from "jsonwebtoken";
 
 export const auth = async (req, res, next) => {
     try {
-        const accessToken = req.headers.authorization.split("Barer ")[1];
+        const accessToken = req.headers.authorization.split("Bearer ")[1];
 
         if (!accessToken) {
+            console.log("token not found");
             return res.status(401).send({ message: "Unauthorized" });
         }
 
@@ -14,6 +15,7 @@ export const auth = async (req, res, next) => {
         );
 
         if (!decodedToken) {
+            console.log("token not valid");
             return res.status(401).send({ message: "Unauthorized" });
         }
 
