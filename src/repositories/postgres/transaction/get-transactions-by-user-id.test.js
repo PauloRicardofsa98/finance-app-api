@@ -8,7 +8,7 @@ describe("GetTransactionsByUserIdRepository", () => {
         const sut = new PostgresGetTransactionsByUserIdRepository();
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
 
         const result = await sut.execute(user.id);
@@ -16,7 +16,7 @@ describe("GetTransactionsByUserIdRepository", () => {
         expect(result.length).toBe(1);
         expect(result[0].name).toBe(transaction.name);
         expect(result[0].type).toBe(transaction.type);
-        expect(result[0].user_id).toBe(user.id);
+        expect(result[0].userId).toBe(user.id);
         expect(String(result[0].amount)).toBe(String(transaction.amount));
         expect(dayjs(result[0].date).daysInMonth()).toBe(
             dayjs(transaction.date).daysInMonth(),
@@ -39,7 +39,7 @@ describe("GetTransactionsByUserIdRepository", () => {
         await sut.execute(user.id);
 
         expect(prismaSpy).toHaveBeenCalledWith({
-            where: { user_id: user.id },
+            where: { userId: user.id },
         });
     });
 

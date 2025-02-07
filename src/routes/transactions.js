@@ -29,7 +29,7 @@ transactionRouter.post("/", auth, async (req, res) => {
         ...req,
         body: {
             ...req.body,
-            user_id: req.userId,
+            userId: req.userId,
         },
     });
     res.status(statusCode).json(body);
@@ -41,7 +41,7 @@ transactionRouter.patch("/:transactionId", auth, async (req, res) => {
         ...req,
         body: {
             ...req.body,
-            user_id: req.userId,
+            userId: req.userId,
         },
     });
     res.status(statusCode).json(body);
@@ -52,7 +52,7 @@ transactionRouter.delete("/:transactionId", auth, async (req, res) => {
         ...req,
         body: {
             ...req.body,
-            user_id: req.userId,
+            userId: req.userId,
         },
     });
     res.status(statusCode).json(body);

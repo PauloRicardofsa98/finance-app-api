@@ -9,7 +9,7 @@ describe("UpdateTransactionRepository", () => {
     it("should update a transaction on db", async () => {
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
         const params = {
             id: faker.string.uuid(),
@@ -30,7 +30,7 @@ describe("UpdateTransactionRepository", () => {
         expect(result.id).toBe(params.id);
         expect(result.name).toBe(params.name);
         expect(result.type).toBe(params.type);
-        expect(result.user_id).toBe(user.id);
+        expect(result.userId).toBe(user.id);
         expect(String(result.amount)).toBe(String(params.amount));
     });
 
@@ -38,19 +38,19 @@ describe("UpdateTransactionRepository", () => {
         // Arrange
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
         const sut = new PostgresUpdateTransactionRepository();
         const prismaSpy = import.meta.jest.spyOn(prisma.transaction, "update");
 
         // Act
-        await sut.execute(transaction.id, { ...transaction, user_id: user.id });
+        await sut.execute(transaction.id, { ...transaction, userId: user.id });
 
         // Assert
 
         expect(prismaSpy).toHaveBeenCalledWith({
             where: { id: transaction.id },
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
     });
 
@@ -64,7 +64,7 @@ describe("UpdateTransactionRepository", () => {
         // Act
         const promise = sut.execute(transaction.id, {
             ...transaction,
-            user_id: user.id,
+            userId: user.id,
         });
 
         // Assert

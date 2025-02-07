@@ -10,7 +10,7 @@ export class UpdateTransactionUseCase {
         const transaction =
             await this.getTransactionByIdRepository.execute(transactionId);
 
-        if (transaction.user_id !== params.user_id) {
+        if (transaction.userId !== params.userId) {
             throw new ForbiddenError();
         }
 

@@ -18,11 +18,11 @@ describe("Transaction Routes E2E Tests", () => {
             .send({
                 ...transaction,
                 id: undefined,
-                user_id: createdUser.id,
+                userId: createdUser.id,
             });
 
         expect(response.status).toBe(201);
-        expect(response.body.user_id).toBe(createdUser.id);
+        expect(response.body.userId).toBe(createdUser.id);
         expect(response.body.amount).toBe(String(transaction.amount));
         expect(response.body.type).toBe(transaction.type);
     });
@@ -40,7 +40,7 @@ describe("Transaction Routes E2E Tests", () => {
             .send({
                 ...transaction,
                 id: undefined,
-                user_id: createdUser.id,
+                userId: createdUser.id,
             });
 
         const response = await request(app).get(
@@ -64,7 +64,7 @@ describe("Transaction Routes E2E Tests", () => {
             .send({
                 ...transaction,
                 id: undefined,
-                user_id: createdUser.id,
+                userId: createdUser.id,
             });
 
         const updateTransactionParams = {
@@ -94,7 +94,7 @@ describe("Transaction Routes E2E Tests", () => {
             .send({
                 ...transaction,
                 id: undefined,
-                user_id: createdUser.id,
+                userId: createdUser.id,
             });
 
         const response = await request(app).delete(

@@ -14,7 +14,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "EARNING",
                     amount: 5000,
                 },
@@ -22,7 +22,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "EARNING",
                     amount: 5000,
                 },
@@ -30,7 +30,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "EXPENSE",
                     amount: 1000,
                 },
@@ -38,7 +38,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "EXPENSE",
                     amount: 1000,
                 },
@@ -46,7 +46,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "INVESTMENT",
                     amount: 3000,
                 },
@@ -54,7 +54,7 @@ describe("GetUserBalanceRepository", () => {
                 {
                     name: faker.string.sample(),
                     date: faker.date.recent(),
-                    user_id: user.id,
+                    userId: user.id,
                     type: "INVESTMENT",
                     amount: 3000,
                 },
@@ -99,21 +99,21 @@ describe("GetUserBalanceRepository", () => {
         //Assert
         expect(aggregateSpy).toHaveBeenCalledTimes(3);
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { user_id: user.id, type: "EXPENSE" },
+            where: { userId: user.id, type: "EXPENSE" },
             _sum: {
                 amount: true,
             },
         });
 
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { user_id: user.id, type: "EARNING" },
+            where: { userId: user.id, type: "EARNING" },
             _sum: {
                 amount: true,
             },
         });
 
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { user_id: user.id, type: "INVESTMENT" },
+            where: { userId: user.id, type: "INVESTMENT" },
             _sum: {
                 amount: true,
             },

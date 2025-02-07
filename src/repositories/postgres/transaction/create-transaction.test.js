@@ -10,12 +10,12 @@ describe("CreateTransactionRepository", () => {
         const sut = new PostgresCreateTransactionRepository();
 
         // Act
-        const result = await sut.execute({ ...transaction, user_id: user.id });
+        const result = await sut.execute({ ...transaction, userId: user.id });
 
         // Assert
         expect(result.name).toBe(transaction.name);
         expect(result.value).toBe(transaction.value);
-        expect(result.user_id).toBe(user.id);
+        expect(result.userId).toBe(user.id);
         expect(Number(result.type)).toBe(Number(transaction.type));
         expect(dayjs(result.date).day).toBe(dayjs(transaction.date).day);
     });
@@ -27,11 +27,11 @@ describe("CreateTransactionRepository", () => {
 
         // Act
         const user = await prisma.user.create({ data: fakerUser });
-        await sut.execute({ ...transaction, user_id: user.id });
+        await sut.execute({ ...transaction, userId: user.id });
 
         // Assert
         expect(prismaSpy).toHaveBeenCalledWith({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
     });
 

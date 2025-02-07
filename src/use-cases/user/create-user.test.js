@@ -25,7 +25,7 @@ describe("Create User Use Case", () => {
 
     class IdGeneratorAdapterStub {
         execute() {
-            return "user_id";
+            return "userId";
         }
     }
 
@@ -120,7 +120,7 @@ describe("Create User Use Case", () => {
         expect(createUserRepositorySpy).toHaveBeenCalledWith({
             ...user,
             password: "hashed_password",
-            id: "user_id",
+            id: "userId",
         });
     });
 

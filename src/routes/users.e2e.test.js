@@ -84,21 +84,21 @@ describe("User Routes E2E Tests", () => {
             });
 
         await request(app).post("/api/transactions").send({
-            user_id: createdUser.id,
+            userId: createdUser.id,
             name: faker.finance.accountName(),
             date: faker.date.recent().toISOString(),
             type: TransactionType.EARNING,
             amount: 10000,
         });
         await request(app).post("/api/transactions").send({
-            user_id: createdUser.id,
+            userId: createdUser.id,
             name: faker.finance.accountName(),
             date: faker.date.recent().toISOString(),
             type: TransactionType.EXPENSE,
             amount: 2000,
         });
         await request(app).post("/api/transactions").send({
-            user_id: createdUser.id,
+            userId: createdUser.id,
             name: faker.finance.accountName(),
             date: faker.date.recent().toISOString(),
             type: TransactionType.INVESTMENT,

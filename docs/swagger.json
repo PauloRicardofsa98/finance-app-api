@@ -426,7 +426,7 @@
                     "type": "string",
                     "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
                 },
-                "user_id": {
+                "userId": {
                     "type": "string",
                     "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
                 },
@@ -452,7 +452,7 @@
         "CreateTransactionParams": {
             "type": "object",
             "properties": {
-                "user_id": {
+                "userId": {
                     "type": "string",
                     "example": "8cdbed04-4b2a-4377-9bd6-a9f7dcae5d9d"
                 },

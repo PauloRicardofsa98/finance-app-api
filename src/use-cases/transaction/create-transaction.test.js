@@ -64,9 +64,7 @@ describe("CreateTransactionUseCase", () => {
         await sut.execute(createTransactionParams);
 
         // Assert
-        expect(executeSpy).toHaveBeenCalledWith(
-            createTransactionParams.user_id,
-        );
+        expect(executeSpy).toHaveBeenCalledWith(createTransactionParams.userId);
     });
 
     it("should call IdGeneratorAdapter", async () => {
@@ -114,7 +112,7 @@ describe("CreateTransactionUseCase", () => {
 
         // Assert
         await expect(promise).rejects.toThrow(
-            new UserNotFoundError(createTransactionParams.user_id),
+            new UserNotFoundError(createTransactionParams.userId),
         );
     });
 

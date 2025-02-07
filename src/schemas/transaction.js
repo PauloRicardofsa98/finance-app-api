@@ -2,12 +2,12 @@ import validator from "validator";
 import { z } from "zod";
 
 export const createTransactionSchema = z.object({
-    user_id: z
+    userId: z
         .string({
-            required_error: "user_id is required",
+            required_error: "userId is required",
         })
         .uuid({
-            message: "user_id must be a valid UUID.",
+            message: "userId must be a valid UUID.",
         }),
     name: z
         .string({
@@ -43,5 +43,5 @@ export const createTransactionSchema = z.object({
 });
 
 export const updateTransactionSchema = createTransactionSchema
-    .omit({ user_id: true })
+    .omit({ userId: true })
     .partial();

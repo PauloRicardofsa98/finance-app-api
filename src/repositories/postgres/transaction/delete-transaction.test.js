@@ -8,7 +8,7 @@ describe("DeleteTransactionRepository", () => {
     it("should delete a transaction on db", async () => {
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
 
         // Arrange
@@ -21,7 +21,7 @@ describe("DeleteTransactionRepository", () => {
 
         expect(result.name).toBe(transaction.name);
         expect(result.type).toBe(transaction.type);
-        expect(result.user_id).toBe(user.id);
+        expect(result.userId).toBe(user.id);
         expect(String(result.amount)).toBe(String(transaction.amount));
     });
 
@@ -29,7 +29,7 @@ describe("DeleteTransactionRepository", () => {
         // Arrange
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
         const sut = new PostgresDeleteTransactionRepository();
         const prismaSpy = import.meta.jest.spyOn(prisma.transaction, "delete");
@@ -48,7 +48,7 @@ describe("DeleteTransactionRepository", () => {
         // Arrange
         await prisma.user.create({ data: user });
         await prisma.transaction.create({
-            data: { ...transaction, user_id: user.id },
+            data: { ...transaction, userId: user.id },
         });
         const sut = new PostgresDeleteTransactionRepository();
         import.meta.jest
