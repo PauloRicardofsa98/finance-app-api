@@ -28,10 +28,10 @@ export class GetTransactionsByUserIdController {
 
             return ok(transactions);
         } catch (error) {
-            console.log(error);
             if (error instanceof UserNotFoundError) {
                 return userNotFoundResponse(error.message);
             }
+            console.log(error);
             return serverError();
         }
     }

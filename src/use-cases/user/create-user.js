@@ -36,9 +36,7 @@ export class CreateUserUseCase {
         };
 
         const createdUser = await this.createUserRepository.execute(user);
-        const tokens = this.tokenGeneratorAdapter.execute({
-            userId,
-        });
+        const tokens = this.tokenGeneratorAdapter.execute(userId);
 
         return { ...createdUser, tokens };
     }
