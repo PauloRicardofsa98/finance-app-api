@@ -4,6 +4,7 @@ import {
     PostgresGetUserByIdRepository,
     PostgresUpdateTransactionRepository,
     PostgresDeleteTransactionRepository,
+    PostgresGetTransactionsByIdRepository,
 } from "../../repositories/postgres/index.js";
 import {
     GetTransactionsByUserIdUseCase,
@@ -57,9 +58,12 @@ export const makeCreateTransactionController = () => {
 export const makeUpdateTransactionController = () => {
     const updateTransactionRepository =
         new PostgresUpdateTransactionRepository();
+    const getTransactionsByIdRepository =
+        new PostgresGetTransactionsByIdRepository();
 
     const updateTransactionUseCase = new UpdateTransactionUseCase(
         updateTransactionRepository,
+        getTransactionsByIdRepository,
     );
 
     const updateTransactionController = new UpdateTransactionController(
