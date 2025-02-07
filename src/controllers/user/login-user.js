@@ -19,10 +19,7 @@ export class LoginUserController {
 
             await loginSchema.parseAsync({ email, password });
 
-            const user = await this.loginUserUseCase.execute({
-                email,
-                password,
-            });
+            const user = await this.loginUserUseCase.execute(email, password);
             return ok(user);
         } catch (error) {
             if (error instanceof UserNotFoundError) {
@@ -34,7 +31,7 @@ export class LoginUserController {
             if (error instanceof ZodError) {
                 badRequest(error.errors);
             }
-
+            console.log(error);
             return serverError();
         }
     }
