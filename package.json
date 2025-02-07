@@ -9,6 +9,7 @@
         "test:coverage": "yarn test --coverage ",
         "postinstall": "husky install && prisma generate",
         "dev": "node --watch index.js",
+        "start": "node index.js",
         "eslint:check": "eslint src",
         "prettier:check": "prettier --check src"
     },
