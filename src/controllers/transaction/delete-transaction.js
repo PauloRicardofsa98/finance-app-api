@@ -22,7 +22,10 @@ export class DeleteTransactionController {
             }
 
             const deletedTransaction =
-                await this.deleteTransactionUseCase.execute(transactionId);
+                await this.deleteTransactionUseCase.execute(
+                    transactionId,
+                    request.params.userId,
+                );
 
             return ok(deletedTransaction);
         } catch (error) {
