@@ -4,6 +4,9 @@ import { UserNotFoundError } from "../../errors/user";
 import { transaction } from "../../tests";
 
 describe("Get Transactions By User Id Controller", () => {
+    const from = "2025-01-01";
+    const to = "2025-01-31";
+
     class GetTransactionsByUserIdUseCaseStub {
         async execute() {
             return [transaction];
@@ -27,6 +30,8 @@ describe("Get Transactions By User Id Controller", () => {
         const response = await sut.execute({
             query: {
                 userId: faker.string.uuid(),
+                from,
+                to,
             },
         });
 
@@ -38,7 +43,7 @@ describe("Get Transactions By User Id Controller", () => {
         //arrange
         const { sut } = makeSut();
         const httpRequestWithoutUserId = {
-            query: {},
+            query: { userId: undefined, from, to },
         };
 
         //act
@@ -54,6 +59,8 @@ describe("Get Transactions By User Id Controller", () => {
         const httpRequestWithInvalidUserId = {
             query: {
                 userId: "invalid_id",
+                from,
+                to,
             },
         };
 
@@ -75,6 +82,8 @@ describe("Get Transactions By User Id Controller", () => {
         const response = await sut.execute({
             query: {
                 userId: faker.string.uuid(),
+                from,
+                to,
             },
         });
 
@@ -93,6 +102,8 @@ describe("Get Transactions By User Id Controller", () => {
         const response = await sut.execute({
             query: {
                 userId: faker.string.uuid(),
+                from,
+                to,
             },
         });
 
@@ -112,6 +123,8 @@ describe("Get Transactions By User Id Controller", () => {
         await sut.execute({
             query: {
                 userId,
+                from,
+                to,
             },
         });
 
