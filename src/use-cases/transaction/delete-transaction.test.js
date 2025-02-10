@@ -3,11 +3,20 @@ import { DeleteTransactionUseCase } from "./delete-transaction";
 import { transaction } from "../../tests";
 
 describe("DeleteTransactionUseCase", () => {
+    const userId = faker.string.uuid();
     class DeleteTransactionRepositoryStub {
-        async execute(transactionId) {
+        async execute() {
             return {
                 ...transaction,
-                transactionId,
+                userId,
+            };
+        }
+    }
+    class GetTransactionByIdRepositoryStub {
+        async execute() {
+            return {
+                ...transaction,
+                userId,
             };
         }
     }
@@ -15,21 +24,28 @@ describe("DeleteTransactionUseCase", () => {
     const makeSut = () => {
         const deleteTransactionRepositoryStub =
             new DeleteTransactionRepositoryStub();
+        const getTransactionByIdRepositoryStub =
+            new GetTransactionByIdRepositoryStub();
         const sut = new DeleteTransactionUseCase(
             deleteTransactionRepositoryStub,
+            getTransactionByIdRepositoryStub,
         );
-        return { sut, deleteTransactionRepositoryStub };
+        return {
+            sut,
+            deleteTransactionRepositoryStub,
+            getTransactionByIdRepositoryStub,
+        };
     };
 
     it("should delete a transaction", async () => {
         // Arrange
         const { sut } = makeSut();
         // Act
-        const deletedTransaction = await sut.execute(transaction.id);
+        const deletedTransaction = await sut.execute(transaction.id, userId);
         // Assert
         expect(deletedTransaction).toEqual({
             ...transaction,
-            transactionId: transaction.id,
+            userId,
         });
     });
 
@@ -42,7 +58,7 @@ describe("DeleteTransactionUseCase", () => {
         );
         const id = faker.string.uuid();
         // Act
-        await sut.execute(id);
+        await sut.execute(id, userId);
         // Assert
         expect(executeSpy).toHaveBeenCalledWith(id);
     });
@@ -54,7 +70,7 @@ describe("DeleteTransactionUseCase", () => {
             .spyOn(deleteTransactionRepositoryStub, "execute")
             .mockRejectedValueOnce(new Error());
         // Act
-        const promise = sut.execute(transaction.id);
+        const promise = sut.execute(transaction.id, userId);
         // Assert
         await expect(promise).rejects.toThrow();
     });
