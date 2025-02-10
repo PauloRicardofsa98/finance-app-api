@@ -1,8 +1,7 @@
 import request from "supertest";
 import { app } from "../app.js";
 import { transaction, user } from "../tests";
-// import { faker } from "@faker-js/faker";
-// import { TransactionType } from "@prisma/client";
+import { faker } from "@faker-js/faker";
 
 describe("Transaction Routes E2E Tests", () => {
     it("POST /api/transactions should return 201 when transaction is created", async () => {
@@ -110,38 +109,17 @@ describe("Transaction Routes E2E Tests", () => {
         expect(response.body).toEqual(createdTransaction);
     });
 
-    // it("PATCH /api/transactions/:transactionId should return 404 when transaction is not found", async () => {
-    //     //create user
-    //     const { body: createdUser } = await request(app)
-    //         .post("/api/users")
-    //         .send({
-    //             ...user,
-    //             id: undefined,
-    //         });
-    //     const response = await request(app)
-    //         .patch(`/api/transactions/${faker.string.uuid()}`)
-    //         .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
-    //         .send({
-    //             amount: 100,
-    //             type: TransactionType.INVESTMENT,
-    //         });
+    it("DELETE /api/transactions/:transactionId should return 404 when transaction is not found", async () => {
+        const { body: createdUser } = await request(app)
+            .post("/api/users")
+            .send({
+                ...user,
+                id: undefined,
+            });
+        const response = await request(app)
+            .delete(`/api/transactions/${faker.string.uuid()}`)
+            .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`);
 
-    //     expect(response.status).toBe(404);
-    // });
-
-    // it("DELETE /api/transactions/:transactionId should return 404 when transaction is not found", async () => {
-    //     const response = await request(app).delete(
-    //         `/api/transactions/${faker.string.uuid()}`,
-    //     );
-
-    //     expect(response.status).toBe(404);
-    // });
-
-    // it("GET /api/transactions?userId should return 404 when transaction is not found", async () => {
-    //     const response = await request(app).get(
-    //         `/api/transactions?userId=${faker.string.uuid()}`,
-    //     );
-
-    //     expect(response.status).toBe(404);
-    // });
+        expect(response.status).toBe(404);
+    });
 });

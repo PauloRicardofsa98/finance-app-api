@@ -83,27 +83,36 @@ describe("User Routes E2E Tests", () => {
                 id: undefined,
             });
 
-        await request(app).post("/api/transactions").send({
-            userId: createdUser.id,
-            name: faker.finance.accountName(),
-            date: faker.date.recent().toISOString(),
-            type: TransactionType.EARNING,
-            amount: 10000,
-        });
-        await request(app).post("/api/transactions").send({
-            userId: createdUser.id,
-            name: faker.finance.accountName(),
-            date: faker.date.recent().toISOString(),
-            type: TransactionType.EXPENSE,
-            amount: 2000,
-        });
-        await request(app).post("/api/transactions").send({
-            userId: createdUser.id,
-            name: faker.finance.accountName(),
-            date: faker.date.recent().toISOString(),
-            type: TransactionType.INVESTMENT,
-            amount: 2000,
-        });
+        await request(app)
+            .post("/api/transactions")
+            .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
+            .send({
+                userId: createdUser.id,
+                name: faker.finance.accountName(),
+                date: faker.date.recent().toISOString(),
+                type: TransactionType.EARNING,
+                amount: 10000,
+            });
+        await request(app)
+            .post("/api/transactions")
+            .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
+            .send({
+                userId: createdUser.id,
+                name: faker.finance.accountName(),
+                date: faker.date.recent().toISOString(),
+                type: TransactionType.EXPENSE,
+                amount: 2000,
+            });
+        await request(app)
+            .post("/api/transactions")
+            .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
+            .send({
+                userId: createdUser.id,
+                name: faker.finance.accountName(),
+                date: faker.date.recent().toISOString(),
+                type: TransactionType.INVESTMENT,
+                amount: 2000,
+            });
 
         const response = await request(app)
             .get(`/api/users/balance`)
