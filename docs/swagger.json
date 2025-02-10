@@ -555,6 +555,18 @@
                 "investments": {
                     "type": "string",
                     "example": 100
+                },
+                "earningsPercentage": {
+                    "type": "string",
+                    "example": 10
+                },
+                "expensesPercentage": {
+                    "type": "string",
+                    "example": 10
+                },
+                "investmentsPercentage": {
+                    "type": "string",
+                    "example": 10
                 }
             }
         },
