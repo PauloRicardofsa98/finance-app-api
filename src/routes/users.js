@@ -32,6 +32,10 @@ userRouter.get("/balance", auth, async (req, res) => {
         params: {
             userId: req.userId,
         },
+        query: {
+            from: req.query.from,
+            to: req.query.to,
+        },
     });
 
     res.status(statusCode).json(body);
