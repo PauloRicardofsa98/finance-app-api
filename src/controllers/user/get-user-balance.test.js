@@ -4,6 +4,9 @@ import { UserNotFoundError } from "../../errors/user.js";
 import { userBalance } from "../../tests";
 
 describe("Get User Balance Controller", () => {
+    const from = "2025-01-01";
+    const to = "2025-01-31";
+
     class GetUserBalanceUseCaseStup {
         async execute() {
             return userBalance;
@@ -19,6 +22,7 @@ describe("Get User Balance Controller", () => {
 
     const httpRequest = {
         params: { userId: faker.string.uuid() },
+        query: { from, to },
     };
 
     it("should return 200 with getting user balance", async () => {
@@ -26,7 +30,7 @@ describe("Get User Balance Controller", () => {
         const { sut } = makeSut();
 
         // act
-        const response = await sut.execute(httpRequest);
+        const response = await sut.execute(httpRequest, from, to);
 
         // assert
         expect(response.statusCode).toBe(200);
@@ -39,6 +43,7 @@ describe("Get User Balance Controller", () => {
         // act
         const response = await sut.execute({
             params: { userId: "invalid_id" },
+            query: { from, to },
         });
 
         // assert
@@ -84,9 +89,13 @@ describe("Get User Balance Controller", () => {
         );
 
         // act
-        await sut.execute(httpRequest);
+        await sut.execute(httpRequest, from, to);
 
         // assert
-        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId);
+        expect(executeSpy).toHaveBeenCalledWith(
+            httpRequest.params.userId,
+            from,
+            to,
+        );
     });
 });
