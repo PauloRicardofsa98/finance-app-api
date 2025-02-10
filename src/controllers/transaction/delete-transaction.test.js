@@ -84,13 +84,18 @@ describe("Delete Transaction Controller", () => {
             deleteTransactionUseCase,
             "execute",
         );
+        const userId = faker.string.uuid();
+        const transactionId = faker.string.uuid();
 
         //act
-        await sut.execute(httpRequest);
+        await sut.execute({
+            params: {
+                transactionId,
+                userId,
+            },
+        });
 
         //assert
-        expect(executeSpy).toHaveBeenCalledWith(
-            httpRequest.params.transactionId,
-        );
+        expect(executeSpy).toHaveBeenCalledWith(transactionId, userId);
     });
 });
