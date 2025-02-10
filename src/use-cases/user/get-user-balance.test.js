@@ -4,6 +4,9 @@ import { UserNotFoundError } from "../../errors/user";
 import { userBalance, user } from "../../tests";
 
 describe("GetUserBalance UseCase", () => {
+    const from = "2025-01-01";
+    const to = "2025-01-31";
+
     class GetUserBalanceRepositoryStub {
         async execute() {
             return userBalance;
@@ -82,10 +85,14 @@ describe("GetUserBalance UseCase", () => {
         const uuid = faker.string.uuid();
 
         // Act
-        await sut.execute(uuid);
+        await sut.execute(uuid, from, to);
 
         // Assert
-        expect(getUserBalanceRepositorySpy).toHaveBeenCalledWith(uuid);
+        expect(getUserBalanceRepositorySpy).toHaveBeenCalledWith(
+            uuid,
+            from,
+            to,
+        );
     });
 
     it("should throw an error if GetUserBalanceRepository throws", async () => {
