@@ -211,7 +211,7 @@
                 ]
             }
         },
-        "/api/transactions": {
+        "/api/transactions/me": {
             "get": {
                 "summary": "Get all transactions from authenticated user",
                 "tags": ["Transaction"],
@@ -316,7 +316,7 @@
                 ]
             }
         },
-        "/api/transactions/{transactionId}": {
+        "/api/transactions/me/{transactionId}": {
             "patch": {
                 "summary": "Update transaction by id from authenticated user",
                 "tags": ["Transaction"],
