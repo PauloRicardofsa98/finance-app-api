@@ -4,6 +4,9 @@ import { user as fakeUser } from "../../../tests";
 import { PostgresGetUserBalanceRepository } from "./get-user-balance";
 
 describe("GetUserBalanceRepository", () => {
+    const from = "2025-01-01";
+    const to = "2025-01-31";
+
     it("should get user balance on db", async () => {
         const user = await prisma.user.create({
             data: fakeUser,
@@ -13,7 +16,7 @@ describe("GetUserBalanceRepository", () => {
             data: [
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "EARNING",
                     amount: 5000,
@@ -21,7 +24,7 @@ describe("GetUserBalanceRepository", () => {
 
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "EARNING",
                     amount: 5000,
@@ -29,7 +32,7 @@ describe("GetUserBalanceRepository", () => {
 
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "EXPENSE",
                     amount: 1000,
@@ -37,7 +40,7 @@ describe("GetUserBalanceRepository", () => {
 
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "EXPENSE",
                     amount: 1000,
@@ -45,7 +48,7 @@ describe("GetUserBalanceRepository", () => {
 
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "INVESTMENT",
                     amount: 3000,
@@ -53,7 +56,7 @@ describe("GetUserBalanceRepository", () => {
 
                 {
                     name: faker.string.sample(),
-                    date: faker.date.recent(),
+                    date: new Date(from),
                     userId: user.id,
                     type: "INVESTMENT",
                     amount: 3000,
@@ -65,7 +68,7 @@ describe("GetUserBalanceRepository", () => {
         const sut = new PostgresGetUserBalanceRepository();
 
         //Act
-        const result = await sut.execute(user.id);
+        const result = await sut.execute(user.id, from, to);
         console.log({
             earning: result.earning.toString(),
             expenses: result.expenses.toString(),
@@ -94,26 +97,38 @@ describe("GetUserBalanceRepository", () => {
         const sut = new PostgresGetUserBalanceRepository();
 
         //Act
-        await sut.execute(user.id);
+        await sut.execute(user.id, from, to);
 
         //Assert
         expect(aggregateSpy).toHaveBeenCalledTimes(3);
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { userId: user.id, type: "EXPENSE" },
+            where: {
+                userId: user.id,
+                type: "EXPENSE",
+                date: { gte: new Date(from), lte: new Date(to) },
+            },
             _sum: {
                 amount: true,
             },
         });
 
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { userId: user.id, type: "EARNING" },
+            where: {
+                userId: user.id,
+                type: "EARNING",
+                date: { gte: new Date(from), lte: new Date(to) },
+            },
             _sum: {
                 amount: true,
             },
         });
 
         expect(aggregateSpy).toHaveBeenCalledWith({
-            where: { userId: user.id, type: "INVESTMENT" },
+            where: {
+                userId: user.id,
+                type: "INVESTMENT",
+                date: { gte: new Date(from), lte: new Date(to) },
+            },
             _sum: {
                 amount: true,
             },
