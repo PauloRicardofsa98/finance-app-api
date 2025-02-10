@@ -16,7 +16,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const response = await request(app)
-            .post("/api/transactions")
+            .post("/api/transactions/me")
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 ...transaction,
@@ -39,7 +39,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const { body: createdTransaction } = await request(app)
-            .post("/api/transactions")
+            .post("/api/transactions/me")
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 ...transaction,
@@ -49,7 +49,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const response = await request(app)
-            .get(`/api/transactions?from=${from}&to=${to}`)
+            .get(`/api/transactions/me/?from=${from}&to=${to}`)
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`);
 
         expect(response.status).toBe(200);
@@ -65,7 +65,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const { body: createdTransaction } = await request(app)
-            .post("/api/transactions")
+            .post("/api/transactions/me")
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 ...transaction,
@@ -78,7 +78,7 @@ describe("Transaction Routes E2E Tests", () => {
         };
 
         const response = await request(app)
-            .patch(`/api/transactions/${createdTransaction.id}`)
+            .patch(`/api/transactions/me/${createdTransaction.id}`)
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
             .send(updateTransactionParams);
 
@@ -97,7 +97,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const { body: createdTransaction } = await request(app)
-            .post("/api/transactions")
+            .post("/api/transactions/me")
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 ...transaction,
@@ -106,7 +106,7 @@ describe("Transaction Routes E2E Tests", () => {
             });
 
         const response = await request(app)
-            .delete(`/api/transactions/${createdTransaction.id}`)
+            .delete(`/api/transactions/me/${createdTransaction.id}`)
             .set("Authorization", `Bearer ${createdUser.tokens.accessToken}`);
 
         expect(response.status).toBe(200);
