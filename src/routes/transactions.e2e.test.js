@@ -45,6 +45,7 @@ describe("Transaction Routes E2E Tests", () => {
                 ...transaction,
                 id: undefined,
                 userId: createdUser.id,
+                date: new Date(from),
             });
 
         const response = await request(app)
