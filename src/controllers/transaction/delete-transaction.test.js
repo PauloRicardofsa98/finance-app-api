@@ -20,6 +20,7 @@ describe("Delete Transaction Controller", () => {
     const httpRequest = {
         params: {
             transactionId: faker.string.uuid(),
+            userId: faker.string.uuid(),
         },
     };
 
@@ -42,6 +43,7 @@ describe("Delete Transaction Controller", () => {
         const result = await sut.execute({
             params: {
                 transactionId: "invalid_id",
+                userId: faker.string.uuid(),
             },
         });
 
