@@ -20,6 +20,42 @@
     ],
     "paths": {
         "/api/users": {
+            "post": {
+                "summary": "Create a new user",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CreateUserParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created",
+                        "schema": {
+                            "$ref": "#/definitions/UserWithToken"
+                        }
+                    },
+                    "400": {
+                        "description": "invalid params",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidParamsResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/me": {
             "get": {
                 "summary": "Get authenticated user",
                 "tags": ["User"],
@@ -116,43 +152,9 @@
                         "BearerAuth": []
                     }
                 ]
-            },
-            "post": {
-                "summary": "Create a new user",
-                "tags": ["User"],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "required": true,
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/CreateUserParams"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "User created",
-                        "schema": {
-                            "$ref": "#/definitions/UserWithToken"
-                        }
-                    },
-                    "400": {
-                        "description": "invalid params",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidParamsResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/InternalServerErrorResponse"
-                        }
-                    }
-                }
             }
         },
-        "/api/users/balance": {
+        "/api/users/me/balance": {
             "get": {
                 "summary": "Get authenticated user balance",
                 "tags": ["User"],
