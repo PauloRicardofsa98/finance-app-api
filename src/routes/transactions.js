@@ -16,6 +16,8 @@ transactionRouter.get("/", auth, async (req, res) => {
         {
             ...req,
             query: {
+                from: req.query.from,
+                to: req.query.to,
                 userId: req.userId,
             },
         },
