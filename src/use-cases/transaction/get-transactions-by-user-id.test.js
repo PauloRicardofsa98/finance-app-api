@@ -67,12 +67,14 @@ describe("GetTransactionsByUserIdUseCase", () => {
             "execute",
         );
         const userId = faker.string.uuid();
+        const from = "2025-01-01";
+        const to = "2025-01-31";
 
         // Act
-        await sut.execute(userId);
+        await sut.execute(userId, from, to);
 
         // Assert
-        expect(executeSpy).toHaveBeenCalledWith(userId);
+        expect(executeSpy).toHaveBeenCalledWith(userId, from, to);
     });
 
     it("should throw if UserNotFoundError if user does not exist", async () => {
