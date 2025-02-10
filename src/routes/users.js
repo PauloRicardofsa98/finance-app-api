@@ -5,6 +5,7 @@ import {
     makeGetUserBalanceController,
     makeGetUserByIdController,
     makeLoginUserController,
+    makeRefreshTokenController,
     makeUpdateUserController,
 } from "../factores/controllers/user.js";
 import { auth } from "../middlewares/auth.js";
@@ -70,5 +71,12 @@ userRouter.post("/login", async (req, res) => {
     const loginUserController = makeLoginUserController();
 
     const { statusCode, body } = await loginUserController.execute(req);
+    res.status(statusCode).json(body);
+});
+
+userRouter.post("/refresh-token", async (req, res) => {
+    const refreshTokenController = makeRefreshTokenController();
+
+    const { statusCode, body } = await refreshTokenController.execute(req);
     res.status(statusCode).json(body);
 });
