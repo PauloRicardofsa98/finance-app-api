@@ -1,7 +1,7 @@
 import { TransactionNotFoundError } from "../../errors/transaction.js";
 import { ForbiddenError, UserNotFoundError } from "../../errors/index.js";
 import { updateTransactionSchema } from "../../schemas/transaction.js";
-import { forbidden } from "../helpers/index.js";
+import { forbidden, userNotFoundResponse } from "../helpers/index.js";
 import {
     invalidIdResponse,
     checkIfIdIsValid,
@@ -43,7 +43,7 @@ export class UpdateTransactionController {
                 return badRequest({ message: error.errors[0].message });
             }
             if (error instanceof UserNotFoundError) {
-                return badRequest({ message: error.message });
+                return userNotFoundResponse({ message: error.message });
             }
 
             if (error instanceof TransactionNotFoundError) {
