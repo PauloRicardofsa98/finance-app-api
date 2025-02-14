@@ -123,8 +123,8 @@ describe("UpdateUser UseCase", () => {
             "execute",
         );
         const updateUserParams = {
-            first_name: user.first_name,
-            last_name: user.last_name,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             password: user.password,
         };
@@ -179,8 +179,8 @@ describe("UpdateUser UseCase", () => {
 
         // Act
         const promise = sut.execute(faker.string.uuid(), {
-            first_name: faker.person.firstName(),
-            last_name: faker.person.lastName(),
+            firstName: faker.person.firstName(),
+            lastName: faker.person.lastName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
         });

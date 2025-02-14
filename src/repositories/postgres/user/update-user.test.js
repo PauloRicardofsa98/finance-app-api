@@ -13,11 +13,11 @@ describe("UpdateUserRepository", () => {
 
         // Act
         const result = await sut.execute(user.id, {
-            first_name: "new name",
+            firstName: "new name",
         });
 
         // Assert
-        expect(result).toStrictEqual({ ...user, first_name: "new name" });
+        expect(result).toStrictEqual({ ...user, firstName: "new name" });
     });
 
     it("should call Prisma with correct values", async () => {
@@ -27,12 +27,12 @@ describe("UpdateUserRepository", () => {
         const prismaSpy = import.meta.jest.spyOn(prisma.user, "update");
 
         // Act
-        await sut.execute(user.id, { first_name: "new name" });
+        await sut.execute(user.id, { firstName: "new name" });
 
         // Assert
         expect(prismaSpy).toHaveBeenCalledWith({
             where: { id: user.id },
-            data: { first_name: "new name" },
+            data: { firstName: "new name" },
         });
     });
 
@@ -44,7 +44,7 @@ describe("UpdateUserRepository", () => {
             .mockRejectedValue(new Error());
 
         // Act
-        const promise = sut.execute(fakeUser.id, { first_name: "new name" });
+        const promise = sut.execute(fakeUser.id, { firstName: "new name" });
 
         // Assert
         await expect(promise).rejects.toThrow();
@@ -62,7 +62,7 @@ describe("UpdateUserRepository", () => {
         const userId = faker.string.uuid();
         // Act
         const promise = sut.execute(userId, {
-            first_name: "new name",
+            firstName: "new name",
         });
 
         // Assert

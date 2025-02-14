@@ -44,8 +44,8 @@ describe("User Routes E2E Tests", () => {
             });
 
         const updateUserParams = {
-            first_name: faker.person.firstName(),
-            last_name: faker.person.lastName(),
+            firstName: faker.person.firstName(),
+            lastName: faker.person.lastName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
         };
@@ -56,8 +56,8 @@ describe("User Routes E2E Tests", () => {
             .send(updateUserParams);
 
         expect(response.status).toBe(200);
-        expect(response.body.first_name).toBe(updateUserParams.first_name);
-        expect(response.body.last_name).toBe(updateUserParams.last_name);
+        expect(response.body.firstName).toBe(updateUserParams.firstName);
+        expect(response.body.lastName).toBe(updateUserParams.lastName);
         expect(response.body.email).toBe(updateUserParams.email);
         expect(response.body.password).not.toBe(updateUserParams.password);
     });

@@ -5,8 +5,8 @@ export class PostgresCreateUserRepository {
         const user = await prisma.user.create({
             data: {
                 id: createUserParams.id,
-                first_name: createUserParams.first_name,
-                last_name: createUserParams.last_name,
+                firstName: createUserParams.firstName,
+                lastName: createUserParams.lastName,
                 email: createUserParams.email,
                 password: createUserParams.password,
             },

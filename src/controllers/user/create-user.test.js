@@ -36,7 +36,7 @@ describe("Create user Controller", () => {
         expect(result.body).toEqual(user);
     });
 
-    it('should return 400 when "first_name" is not provided', async () => {
+    it('should return 400 when "firstName" is not provided', async () => {
         //arrange
         const { sut } = makeSut();
 
@@ -44,7 +44,7 @@ describe("Create user Controller", () => {
         const result = await sut.execute({
             body: {
                 ...httpRequest.body,
-                first_name: undefined,
+                firstName: undefined,
             },
         });
 
@@ -52,7 +52,7 @@ describe("Create user Controller", () => {
         expect(result.statusCode).toBe(400);
     });
 
-    it('should return 400 when "last_name" is not provided', async () => {
+    it('should return 400 when "lastName" is not provided', async () => {
         //arrange
         const { sut } = makeSut();
 
@@ -60,7 +60,7 @@ describe("Create user Controller", () => {
         const result = await sut.execute({
             body: {
                 ...httpRequest.body,
-                last_name: undefined,
+                lastName: undefined,
             },
         });
 
@@ -176,7 +176,7 @@ describe("Create user Controller", () => {
         //act
         const response = await sut.execute({
             body: {
-                first_name: "Paulo",
+                firstName: "Paulo",
             },
         });
 

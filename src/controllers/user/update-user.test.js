@@ -22,8 +22,8 @@ describe("Update User Controller", () => {
             userId: faker.string.uuid(),
         },
         body: {
-            first_name: faker.person.firstName(),
-            last_name: faker.person.lastName(),
+            firstName: faker.person.firstName(),
+            lastName: faker.person.lastName(),
             email: faker.internet.email(),
             password: faker.internet.password({
                 length: 8,
